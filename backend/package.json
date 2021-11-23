@@ -1,0 +1,19 @@
+{
+  "name": "ldcona-backend",
+  "version": "1.0.0",
+  "description": "Lady Davis consultant appointments",
+  "main": "dist/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubarilan/ldcona.git"
+  },
+  "author": "Uri Bar Ilan, Asaf Sivan",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/ubarilan/ldcona/issues"
+  },
+  "homepage": "https://github.com/ubarilan/ldcona#readme"
+}
