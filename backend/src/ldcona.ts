@@ -3,7 +3,9 @@ import { Connection } from 'mysql';
 import session from 'express-session';
 import { config } from 'dotenv';
 import { connectToDatabase } from './lib/mysql';
+import passport from 'passport';
 
+import initializePassport from './lib/passport-config';
 import { initMainRouter } from './lib/routers/main';
 
 config();
@@ -13,8 +15,6 @@ export default class Ldcona {
 
     protected webApp: Application;
     protected mainRouter: Router;
-
-    protected authenticatedSessions: Map<string, number> = new Map();
 
     private initMainRouter: () => void = initMainRouter;
 
@@ -27,7 +27,6 @@ export default class Ldcona {
     ) {
         this.webApp = express();
         this.initRouters();
-        this.initWebApp();
         this.connectAppToDatabase(
             database_host,
             database_port,
@@ -35,15 +34,16 @@ export default class Ldcona {
             database_pass,
             database_name
         );
+        this.initWebApp();
     }
 
-    private connectAppToDatabase(
+    private async connectAppToDatabase(
         database_host: string,
         database_port: number,
         database_user: string,
         database_pass: string,
         database_name: string
-    ): void {
+    ): Promise<void> {
         this.mysqlConnection = connectToDatabase(
             database_host,
             database_port,
@@ -57,7 +57,7 @@ export default class Ldcona {
         this.initMainRouter();
     }
 
-    private initWebApp() {
+    private initWebApp(): void {
         this.webApp.use(express.json());
         this.webApp.use(express.urlencoded({ extended: true }));
         this.webApp.use(express.json());
@@ -70,9 +70,29 @@ export default class Ldcona {
             })
         );
 
+        initializePassport(
+            passport,
+            (email) =>
+                this.getFirstQueryResult(
+                    'SELECT * FROM users WHERE email = ?',
+                    email
+                ),
+            (id) =>
+                this.getFirstQueryResult('SELECT * FROM users WHERE id = ?', id)
+        );
+
+        this.webApp.use(passport.initialize());
+        this.webApp.use(passport.session());
+
         this.webApp.use('/', this.mainRouter);
 
         this.webApp.listen(80);
         console.log('web server running on port 80');
+    }
+
+    protected async getFirstQueryResult(sql: string, args?: any): Promise<any> {
+        let queryRes = await this.mysqlConnection.query(sql, args);
+        if (queryRes[0].length < 1) return null;
+        return queryRes[0][0];
     }
 }

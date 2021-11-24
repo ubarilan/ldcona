@@ -19,14 +19,17 @@
     },
     "homepage": "https://github.com/ubarilan/ldcona#readme",
     "dependencies": {
+        "bcrypt": "^5.0.1",
         "dotenv": "^10.0.0",
         "express": "^4.17.1",
         "express-session": "^1.17.2",
         "mysql": "^2.18.1",
+        "mysql2": "^2.3.3",
         "passport": "^0.5.0",
         "passport-local": "^1.0.0"
     },
     "devDependencies": {
+        "@types/bcrypt": "^5.0.0",
         "@types/express": "^4.17.13",
         "@types/express-session": "^1.17.4",
         "@types/mysql": "^2.15.19",

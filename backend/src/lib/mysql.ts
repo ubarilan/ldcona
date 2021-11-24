@@ -1,12 +1,11 @@
-import mysql, { Connection } from 'mysql';
-
+import mysql, { Connection } from 'mysql2';
 export function connectToDatabase(
     host: string,
     port: number = 3306,
     user: string,
     password: string,
     database_name: string
-): Connection {
+): any {
     const connection: Connection = mysql.createConnection({
         host: host,
         port: port,
@@ -17,5 +16,6 @@ export function connectToDatabase(
     connection.connect(function (err: Error) {
         if (err) throw err;
     });
-    return connection;
+
+    return connection.promise() as any;
 }
