@@ -11,8 +11,8 @@ import { initMainRouter } from './lib/routers/main';
 config();
 
 export default class Ldcona {
+    public passport = passport
     protected mysqlConnection: Connection;
-
     protected webApp: Application;
     protected mainRouter: Router;
 
@@ -26,6 +26,7 @@ export default class Ldcona {
         database_name: string,
         private listen_port: number
     ) {
+        this.passport = passport
         this.webApp = express();
         this.initRouters();
         this.connectAppToDatabase(
@@ -72,7 +73,7 @@ export default class Ldcona {
         );
 
         initializePassport(
-            passport,
+            this.passport,
             (email) =>
                 this.getFirstQueryResult(
                     'SELECT * FROM users WHERE email = ?',
