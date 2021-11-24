@@ -23,7 +23,8 @@ export default class Ldcona {
         database_port: number,
         database_user: string,
         database_pass: string,
-        database_name: string
+        database_name: string,
+        private listen_port: number
     ) {
         this.webApp = express();
         this.initRouters();
@@ -86,8 +87,8 @@ export default class Ldcona {
 
         this.webApp.use('/', this.mainRouter);
 
-        this.webApp.listen(80);
-        console.log('web server running on port 80');
+        this.webApp.listen(this.listen_port);
+        console.log(`web server running on port ${this.listen_port}`);
     }
 
     protected async getFirstQueryResult(sql: string, args?: any): Promise<any> {

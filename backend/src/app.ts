@@ -13,5 +13,6 @@ const app = new Ldcona(
     Number(DATABASE_PORT),
     DATABASE_USER,
     DATABASE_PASS,
-    DATABASE_NAME
+    DATABASE_NAME,
+    Number(process.env.PORT)
 );
