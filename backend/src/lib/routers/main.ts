@@ -13,18 +13,30 @@ export function initMainRouter(this: Ldcona): void {
             res.redirect("/");
         })
     
+    router.get('/login', (req: Request, res: Response) => {
+        res.send(`
+        <form action="/login" method="post">
+        <input name="email" id="email" placeholder="">
+        <input name="password" type="password id="password" placeholder="">
+        <input type="submit">
+        </form>
+        `);
+    });
+    
     router.get('*', (req: Request, res: Response) => {
         res.send(`
         <form action="/login" method="post">
         <input name="email" id="email" placeholder="">
         <input name="password" type="password id="password" placeholder="">
         <input type="submit">
-        
         </form>
+
         <form action="/logout" method="post">
         <button type="submit">logout</button>
         </form>
         `);
 
     });
+
+    
 }
