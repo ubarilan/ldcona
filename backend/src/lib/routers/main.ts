@@ -8,20 +8,10 @@ export function initMainRouter(this: Ldcona): void {
         '/login', this.passport.authenticate('local', {successRedirect: '/login-success', failureRedirect:'/login-fail' }))
 
     router.post(
-        '/logout', (req,res) => {
+        '/logout', (req: Request, res: Response) => {
             req.logout();
             res.redirect("/");
-        })
-    
-    router.get('/login', (req: Request, res: Response) => {
-        res.send(`
-        <form action="/login" method="post">
-        <input name="email" id="email" placeholder="">
-        <input name="password" type="password id="password" placeholder="">
-        <input type="submit">
-        </form>
-        `);
-    });
+        });
     
     router.get('*', (req: Request, res: Response) => {
         res.send(`
