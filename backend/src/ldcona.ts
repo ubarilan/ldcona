@@ -1,4 +1,10 @@
-import express, { Application, Router } from 'express';
+import express, {
+    Application,
+    Router,
+    Request,
+    Response,
+    NextFunction,
+} from 'express';
 import { Connection } from 'mysql';
 import session from 'express-session';
 import { config } from 'dotenv';
@@ -11,7 +17,7 @@ import { initMainRouter } from './lib/routers/main';
 config();
 
 export default class Ldcona {
-    public passport = passport
+    public passport = passport;
     protected mysqlConnection: Connection;
     protected webApp: Application;
     protected mainRouter: Router;
@@ -26,7 +32,7 @@ export default class Ldcona {
         database_name: string,
         private listen_port: number
     ) {
-        this.passport = passport
+        this.passport = passport;
         this.webApp = express();
         this.initRouters();
         this.connectAppToDatabase(
@@ -88,13 +94,26 @@ export default class Ldcona {
 
         this.webApp.use('/', this.mainRouter);
 
-        this.webApp.listen(this.listen_port);
-        console.log(`web server running on port ${this.listen_port}`);
+        this.webApp.listen(this.listen_port, () => {
+            console.log(`web server running on port ${this.listen_port}`);
+        });
     }
 
     protected async getFirstQueryResult(sql: string, args?: any): Promise<any> {
         let queryRes = await this.mysqlConnection.query(sql, args);
         if (queryRes[0].length < 1) return null;
         return queryRes[0][0];
+    }
+
+    public checkAuthenticated(
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): void {
+        if (req.isAuthenticated()) {
+            next();
+        } else {
+            res.redirect('/');
+        }
     }
 }

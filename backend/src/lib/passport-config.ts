@@ -13,7 +13,6 @@ export default function initialize(passport, getUserByEmail, getUserById): any {
                 return done(null, user);
             } else {
                 return done(null, false, { message: 'Incorrect password' });
-                //return done(null, user);
             }
         } catch (e) {
             return done(e);
