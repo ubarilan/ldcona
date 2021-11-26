@@ -73,7 +73,7 @@ export function initMainRouter(this: Ldcona): void {
     );
 
     // Peace of fucking garbage, will not be used in final form after frontend is added. frontend is shit
-    router.get('*', (req: Request, res: Response) => {
+    router.get('/teacher', (req: Request, res: Response) => {
         res.send(`
         <form action="/login" method="post">
         <input name="email" id="email" placeholder="">
@@ -97,4 +97,6 @@ export function initMainRouter(this: Ldcona): void {
         </form>
         `);
     });
+
+    router.get('/student', (req: Request, res: Response) => {});
 }

@@ -95,7 +95,7 @@ export default class Ldcona {
         this.webApp.use(passport.initialize());
         this.webApp.use(passport.session());
 
-        this.webApp.use('/', this.mainRouter);
+        this.webApp.use('/api', this.mainRouter);
 
         this.webApp.listen(this.listen_port, () => {
             console.log(`web server running on port ${this.listen_port}`);
