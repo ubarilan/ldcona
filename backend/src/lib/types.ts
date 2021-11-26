@@ -1,3 +1,4 @@
+// Type for times stored in database
 export interface Time {
     id?: number;
     timestamp: number;
@@ -7,10 +8,15 @@ export interface Time {
     studentNotes?: null | string;
 }
 
+// Global type for req.user
 declare global {
     namespace Express {
         interface User {
             id: number;
+            firstName: string;
+            lastName: string;
+            email: string;
+            passport: string;
         }
     }
 }

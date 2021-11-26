@@ -14,6 +14,7 @@ import passport from 'passport';
 import initializePassport from './lib/passport-config';
 import { initMainRouter } from './lib/routers/main';
 
+// Configure environment variables
 config();
 
 export default class Ldcona {
@@ -61,10 +62,12 @@ export default class Ldcona {
         );
     }
 
+    // Initiate routers
     private initRouters(): void {
         this.initMainRouter();
     }
 
+    // Initiate web app
     private initWebApp(): void {
         this.webApp.use(express.json());
         this.webApp.use(express.urlencoded({ extended: true }));
@@ -99,12 +102,14 @@ export default class Ldcona {
         });
     }
 
+    // Get the first result of a database query
     protected async getFirstQueryResult(sql: string, args?: any): Promise<any> {
         let queryRes = await this.mysqlConnection.query(sql, args);
         if (queryRes[0].length < 1) return null;
         return queryRes[0][0];
     }
 
+    // Utility function to check if a request is authenticated, moves on if it is, and if it's not, the user will be redirected to /
     public checkAuthenticated(
         req: Request,
         res: Response,

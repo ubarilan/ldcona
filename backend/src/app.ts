@@ -1,5 +1,6 @@
 import Ldcona from './ldcona';
 
+// .env variables
 const {
     DATABASE_HOST,
     DATABASE_PORT,

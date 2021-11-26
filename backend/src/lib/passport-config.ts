@@ -1,8 +1,10 @@
 import { Strategy } from 'passport-local';
 import bcrypt from 'bcrypt';
 
+// Initialization of passport configuration
 export default function initialize(passport, getUserByEmail, getUserById): any {
-    const authenticateUser = async (email, password, done) => {
+    // Handle authentication
+    async function authenticateUser(email, password, done) {
         email = email.toLocaleLowerCase().trim();
         const user = await getUserByEmail(email);
         if (user == null) {
@@ -17,7 +19,7 @@ export default function initialize(passport, getUserByEmail, getUserById): any {
         } catch (e) {
             return done(e);
         }
-    };
+    }
 
     passport.use(new Strategy({ usernameField: 'email' }, authenticateUser));
     passport.serializeUser(async (user, done) => done(null, user.id));

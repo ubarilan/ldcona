@@ -7,6 +7,7 @@ export function initMainRouter(this: Ldcona): void {
     this.mainRouter = Router();
     const router: Router = this.mainRouter;
 
+    // Login endpoint
     router.post(
         '/login',
         this.passport.authenticate('local', {
@@ -15,11 +16,13 @@ export function initMainRouter(this: Ldcona): void {
         })
     );
 
+    // Logout endpoint
     router.post('/logout', (req: Request, res: Response) => {
         req.logout();
         res.redirect('/');
     });
 
+    // Show avilabile times of the teachers
     router.get(
         '/times',
         this.checkAuthenticated,
@@ -32,6 +35,7 @@ export function initMainRouter(this: Ldcona): void {
         }
     );
 
+    // Add a time to the database
     router.post(
         '/times/add',
         this.checkAuthenticated,
@@ -51,6 +55,7 @@ export function initMainRouter(this: Ldcona): void {
         }
     );
 
+    // Remove a time from the database
     router.post(
         '/times/remove/',
         this.checkAuthenticated,
@@ -67,6 +72,7 @@ export function initMainRouter(this: Ldcona): void {
         }
     );
 
+    // Peace of fucking garbage, will not be used in final form after frontend is added. frontend is shit
     router.get('*', (req: Request, res: Response) => {
         res.send(`
         <form action="/login" method="post">

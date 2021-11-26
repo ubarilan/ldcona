@@ -1,4 +1,6 @@
 import mysql, { Connection } from 'mysql2';
+
+// Database connection
 export function connectToDatabase(
     host: string,
     port: number = 3306,
