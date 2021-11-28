@@ -4,10 +4,10 @@ import {
     Routes,
     Navigate,
 } from 'react-router-dom';
-import Home from './pages/Home';
-import Page404 from './pages/Page404';
-import Login from './pages/Login';
-import TeacherHome from './pages/Teacher/TeacherHome.jsx';
+import Home from '@Pages/Home';
+import Page404 from '@Pages/Page404';
+import Login from '@Pages/Login';
+import TeacherHome from '@Pages/Teacher/TeacherHome.jsx';
 
 function App() {
     return (
