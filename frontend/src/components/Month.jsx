@@ -17,7 +17,6 @@ function NumbersWeek(props) {
 
 function LastWeek(props) {
     if (props.first >= 5 && props.last != 7) {
-        console.log("greater than 5")
         return (
         <React.Fragment>
             <NumbersWeek start={0} add={(7-props.first)+7*3} end={0} />
@@ -25,7 +24,6 @@ function LastWeek(props) {
         </React.Fragment>
         );
     };
-    console.log("less than 5")
     return (
         <NumbersWeek start={0} add={(7-props.first)+7*3} end={7-props.last} />
     );
@@ -36,8 +34,7 @@ export default function Month(props) {
     let start_day = getDaysInMonth(props.year,props.month).getDay();
     let last_day = getDaysInMonth(props.year,props.month+1).getDay();
     if (last_day == 0) last_day = 7;
-    console.log(start_day);
-    console.log(last_day);
+
 
     return (
         <tbody>
