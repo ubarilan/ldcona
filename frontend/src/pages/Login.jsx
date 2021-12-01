@@ -37,12 +37,6 @@ export default function Login() {
                             placeholder="Password"
                         />
                     </div>
-                    {/* <a
-                            href="#"
-                            className="text-base text-white text-right font-roboto leading-normal hover:underline mb-6"
-                        >
-                            Forget Password ?
-                        </a> */}
                     <input
                         value="Login"
                         type="submit"
