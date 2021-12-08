@@ -13,7 +13,11 @@ function NumbersWeek(props) {
                 <EmptyDay key={i} />
             ))}
             {Array.from({ length: 7 - props.start - props.end }, (_, i) => (
-                <MonthDay number={props.add + i + 1} key={i} />
+                <MonthDay
+                    number={props.add + i + 1}
+                    key={i}
+                    on={i === selected_day_num}
+                />
             ))}
         </tr>
     );
@@ -22,14 +26,14 @@ function NumbersWeek(props) {
 function LastWeek(props) {
     if (props.first >= 5 && props.last !== 7) {
         return (
-            <React.Fragment>
+            <>
                 <NumbersWeek start={0} add={7 - props.first + 7 * 3} end={0} />
                 <NumbersWeek
                     start={0}
                     add={7 - props.first + 7 * 4}
                     end={7 - props.last}
                 />
-            </React.Fragment>
+            </>
         );
     }
     return (
@@ -45,6 +49,7 @@ export default function Month(props) {
     let start_day = getDaysInMonth(props.year, props.month).getDay();
     let last_day = getDaysInMonth(props.year, props.month + 1).getDay();
     if (last_day === 0) last_day = 7;
+    let selected_day_num = 1;
 
     return (
         <tbody>

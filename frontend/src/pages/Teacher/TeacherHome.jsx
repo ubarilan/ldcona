@@ -44,7 +44,7 @@ export default function TeacherHome() {
                             className="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800"
                         >
                             {months[Math.abs(counter) % 12]}{' '}
-                            {d.getYear() + 1900 + Math.floor(counter / 12)}
+                            {d.getFullYear() + Math.floor(counter / 12)}
                         </span>
                         <div className="flex items-center">
                             <button
@@ -104,9 +104,7 @@ export default function TeacherHome() {
                             <Week />
                             <Month
                                 year={
-                                    d.getYear() +
-                                    1900 +
-                                    Math.floor(counter / 12)
+                                    d.getFullYear() + Math.floor(counter / 12)
                                 }
                                 month={Math.abs(counter) % 12}
                             />
