@@ -1,6 +1,7 @@
 import { React } from 'react';
 import MonthDay from '@Components/MonthDay';
 import EmptyDay from '@Components/EmptyDay';
+import { getDateString } from '@Lib/utils';
 
 export default function NumbersWeek(props) {
     if (props.lastWeek) {
@@ -13,10 +14,11 @@ export default function NumbersWeek(props) {
                 ))}
                 {Array.from({ length: 7 - props.start - props.end }, (_, i) => {
                     const dateNumber = props.add + ++i;
-                    const localeDate = `${props.month + 1}/${dateNumber}/${
-                        props.year
-                    }`;
-
+                    const localeDate = getDateString(
+                        new Date(
+                            `${props.month + 1}/${dateNumber}/${props.year}`
+                        )
+                    );
                     return (
                         <MonthDay
                             number={dateNumber}
@@ -44,6 +46,7 @@ function LastWeek(props) {
                     times={props.times}
                     year={props.year}
                     month={props.month}
+                    timesLocale={props.timesLocale}
                 />
                 <NumbersWeek
                     start={0}
@@ -54,6 +57,7 @@ function LastWeek(props) {
                     times={props.times}
                     year={props.year}
                     month={props.month}
+                    timesLocale={props.timesLocale}
                 />
             </>
         );
@@ -68,6 +72,7 @@ function LastWeek(props) {
             times={props.times}
             year={props.year}
             month={props.month}
+            timesLocale={props.timesLocale}
         />
     );
 }
