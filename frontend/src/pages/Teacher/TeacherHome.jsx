@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Week from '@Components/Week';
 import Month from '@Components/Month';
 import Tasks from '@Components/Tasks';
+import { getDateString } from '@Lib/utils';
 
 export default function TeacherHome() {
     const months = [
@@ -24,8 +25,8 @@ export default function TeacherHome() {
 
     let [counter, setCounter] = useState(currentDate.getMonth());
 
-    const addCounter = () => setCounter(counter + 1);
-    const decCounter = () => setCounter(counter - 1);
+    const addCounter = () => setCounter(counter + 1) || setSelectedDate(1);
+    const decCounter = () => setCounter(counter - 1) || setSelectedDate(1);
 
     const [times, setTimes] = useState([]);
 
@@ -33,6 +34,15 @@ export default function TeacherHome() {
         const response = await fetch('/api/times');
         setTimes(await response.json());
     }
+
+    const timesLocale = times
+        .filter((time) => time.acquired)
+        .map((time) => getDateString(new Date(time.timestamp)));
+
+    const acquiredMonths = times
+        .filter((time) => time.acquired)
+        .map((time) => new Date(time.timestamp).getMonth());
+
     useEffect(() => {
         getTimes();
     }, []);
@@ -41,7 +51,12 @@ export default function TeacherHome() {
         <div className="flex items-center justify-center py-8 px-4">
             <div className="max-w-sm w-full shadow-lg">
                 <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
-                    <div className="px-4 flex items-center justify-between">
+                    <div
+                        className={`px-4 flex items-center justify-between ${
+                            acquiredMonths.includes(Math.abs(counter) % 12) &&
+                            'month-with-tasks'
+                        }`}
+                    >
                         <span
                             tabIndex="0"
                             className="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800"
@@ -115,6 +130,7 @@ export default function TeacherHome() {
                                 }
                                 month={Math.abs(counter) % 12}
                                 times={times}
+                                timesLocale={timesLocale}
                             />
                         </table>
                     </div>

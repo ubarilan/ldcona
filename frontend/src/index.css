@@ -15,3 +15,14 @@
     background-size: 20px 20px;
     background-repeat: no-repeat;
 }
+
+.month-with-tasks {
+    background-image: radial-gradient(
+        circle at center,
+        #4338ca 5px,
+        transparent 5px
+    );
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: bottom;
+}

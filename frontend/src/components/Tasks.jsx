@@ -17,8 +17,8 @@ export default function Tasks(props) {
                         return (
                             <Task
                                 time={new Date(time?.timestamp)
-                                    .toLocaleTimeString()
-                                    .slice(0, -3)}
+                                    .toLocaleString()
+                                    .slice(0, -6)}
                                 acquired={time?.acquired || 'Empty hour'}
                                 studentNotes={time?.studentNotes}
                                 key={i}
