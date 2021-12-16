@@ -18,8 +18,11 @@ export default function TeacherHome() {
         'November',
         'December',
     ];
-    const d = new Date();
-    let [counter, setCounter] = useState(d.getMonth());
+    const currentDate = new Date();
+
+    let [selectedDate, setSelectedDate] = useState(currentDate.getDate());
+
+    let [counter, setCounter] = useState(currentDate.getMonth());
 
     const addCounter = () => setCounter(counter + 1);
     const decCounter = () => setCounter(counter - 1);
@@ -44,7 +47,8 @@ export default function TeacherHome() {
                             className="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800"
                         >
                             {months[Math.abs(counter) % 12]}{' '}
-                            {d.getFullYear() + Math.floor(counter / 12)}
+                            {currentDate.getFullYear() +
+                                Math.floor(counter / 12)}
                         </span>
                         <div className="flex items-center">
                             <button
@@ -103,15 +107,24 @@ export default function TeacherHome() {
                         <table className="w-full">
                             <Week />
                             <Month
+                                selectedDate={selectedDate}
+                                setSelectedDate={setSelectedDate}
                                 year={
-                                    d.getFullYear() + Math.floor(counter / 12)
+                                    currentDate.getFullYear() +
+                                    Math.floor(counter / 12)
                                 }
                                 month={Math.abs(counter) % 12}
+                                times={times}
                             />
                         </table>
                     </div>
                 </div>
-                <Tasks />
+                <Tasks
+                    times={times}
+                    selectedDate={selectedDate}
+                    year={currentDate.getFullYear() + Math.floor(counter / 12)}
+                    month={Math.abs(counter) % 12}
+                />
             </div>
         </div>
     );

@@ -6,4 +6,4 @@ export default function EmptyDay() {
             <div className="px-2 py-2 cursor-pointer flex w-full justify-center"></div>
         </td>
     );
-};
+}
