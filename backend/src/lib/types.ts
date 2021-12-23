@@ -16,7 +16,15 @@ declare global {
             firstName: string;
             lastName: string;
             email: string;
-            passport: string;
+            password: string;
         }
     }
+}
+
+export interface CensoredUser {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password?: string;
 }

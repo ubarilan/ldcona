@@ -1,7 +1,6 @@
 import Ldcona from '../../ldcona';
-import { Router, Request, Response, NextFunction } from 'express';
-import { Time } from '../types';
-import { Query } from 'mysql2';
+import e, { Router, Request, Response, NextFunction } from 'express';
+import { Time, CensoredUser } from '../types';
 
 export function initMainRouter(this: Ldcona): void {
     this.mainRouter = Router();
@@ -20,6 +19,14 @@ export function initMainRouter(this: Ldcona): void {
     router.post('/logout', (req: Request, res: Response) => {
         req.logout();
         res.redirect('/');
+    });
+
+    router.get('/userinfo', (req: Request, res: Response) => {
+        if (req.user) {
+            let censoredUserObject: CensoredUser = Object.assign({}, req.user);
+            delete censoredUserObject.password;
+            res.send({ user: censoredUserObject });
+        } else res.send({ user: null });
     });
 
     // Show avilabile times of the teachers
