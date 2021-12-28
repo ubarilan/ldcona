@@ -3,7 +3,6 @@ import Week from '@Components/Week';
 import Month from '@Components/Month';
 import Tasks from '@Components/Tasks';
 import { getDateString } from '@Lib/utils';
-import Navbar from '@Components/Navbar';
 
 export default function TeacherHome() {
     const months = [
@@ -50,8 +49,6 @@ export default function TeacherHome() {
 
     return (
         <>
-            <Navbar name="Dashboard" />
-
             <div className="flex items-center justify-center py-8 px-4">
                 <div className="max-w-sm w-full shadow-lg">
                     <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
