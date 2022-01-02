@@ -29,19 +29,16 @@ export function initStudentRouter(this: Ldcona): void {
     });
 
     router.get('/teachers/:id/times', async (req: Request, res: Response) => {
-        const checkExistsSql: string =
-            'SELECT id, firstName, lastName, email FROM users WHERE id = ?;';
-        const teacher: CensoredUser = await this.getFirstQueryResult(
-            checkExistsSql,
+        const teacherExists: boolean = await this.checkIfTeacherExists(
             req.params.id
         );
-        if (!teacher)
+        if (!teacherExists)
             return res.status(404).send({ status: 'teacher not found' });
 
         const getTimesSql: string =
             'select id, timestamp, teacherNotes from times WHERE acquired IS NULL AND owner = ?;';
         const times: Time[] = (
-            await this.mysqlConnection.query(getTimesSql, teacher.id)
+            await this.mysqlConnection.query(getTimesSql, req.params.id)
         )[0];
         res.send(times);
     });
@@ -49,19 +46,16 @@ export function initStudentRouter(this: Ldcona): void {
     router.get(
         '/teachers/:id/times/:timeid',
         async (req: Request, res: Response) => {
-            const checkExistsSql: string =
-                'SELECT id, firstName, lastName, email FROM users WHERE id = ?;';
-            const teacher: CensoredUser = await this.getFirstQueryResult(
-                checkExistsSql,
+            const teacherExists: boolean = await this.checkIfTeacherExists(
                 req.params.id
             );
-            if (!teacher)
+            if (!teacherExists)
                 return res.status(404).send({ status: 'teacher not found' });
 
             const getTimeSql: string =
                 'select id, timestamp, teacherNotes from times WHERE acquired IS NULL AND owner = ? AND id = ?;';
             const time: Time = await this.getFirstQueryResult(getTimeSql, [
-                teacher.id,
+                req.params.id,
                 req.params.timeid,
             ]);
             if (!time)
@@ -74,19 +68,16 @@ export function initStudentRouter(this: Ldcona): void {
     router.post(
         '/teachers/:id/times/:timeid/acquire',
         async (req: Request, res: Response) => {
-            const checkExistsSql: string =
-                'SELECT id, firstName, lastName, email FROM users WHERE id = ?;';
-            const teacher: CensoredUser = await this.getFirstQueryResult(
-                checkExistsSql,
+            const teacherExists: boolean = await this.checkIfTeacherExists(
                 req.params.id
             );
-            if (!teacher)
+            if (!teacherExists)
                 return res.status(404).send({ status: 'teacher not found' });
 
             const getTimeSql: string =
                 'select id, timestamp, teacherNotes from times WHERE acquired IS NULL AND owner = ? AND id = ?;';
             const time: Time = await this.getFirstQueryResult(getTimeSql, [
-                teacher.id,
+                req.params.id,
                 req.params.timeid,
             ]);
             if (!time)

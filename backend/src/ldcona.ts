@@ -31,6 +31,9 @@ export default class Ldcona {
     private initMainRouter: () => void = initMainRouter;
     private initStudentRouter: () => void = initStudentRouter;
 
+    // Utility functions
+    public checkIfTeacherExists = checkIfTeacherExists;
+
     constructor(
         database_host: string,
         database_port: number,
