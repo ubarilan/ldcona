@@ -24,3 +24,7 @@ export async function getUserInfo() {
 
     return userInfo;
 }
+
+export function classNames(...classes) {
+    return classes.filter(Boolean).join(' ');
+}

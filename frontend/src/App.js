@@ -28,31 +28,28 @@ export default function App() {
     }, [url]);
 
     return (
-        <Router>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/logout" element={<Logout />} />
-                <Route path="/" element={<Home />} />
-                <Route
-                    path="/login-success"
-                    element={<Navigate replace to="/teacherhome" />}
-                />
-                <Route
-                    path="/login-fail"
-                    element={<Navigate replace to="/login" />}
-                />
-                <Route
-                    path="/teacherhome"
-                    element={
-                        <>
-                            {' '}
-                            <Navbar />
-                            <TeacherHome />{' '}
-                        </>
-                    }
-                />
-                <Route path="*" element={<Page404 />} />
-            </Routes>
-        </Router>
+        <>
+            <Navbar user={currentUser} />
+            <Router>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/logout" element={<Logout />} />
+                    <Route path="/" element={<Home />} />
+                    <Route
+                        path="/login-success"
+                        element={<Navigate replace to="/teacherhome" />}
+                    />
+                    <Route
+                        path="/login-fail"
+                        element={<Navigate replace to="/login" />}
+                    />
+                    <Route
+                        path="/teacherhome"
+                        element={<TeacherHome user={currentUser} />}
+                    />
+                    <Route path="*" element={<Page404 />} />
+                </Routes>
+            </Router>
+        </>
     );
 }

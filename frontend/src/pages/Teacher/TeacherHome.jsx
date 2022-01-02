@@ -4,7 +4,7 @@ import Month from '@Components/Month';
 import Tasks from '@Components/Tasks';
 import { getDateString } from '@Lib/utils';
 
-export default function TeacherHome() {
+export default function TeacherHome({ user }) {
     const months = [
         'January',
         'February',
@@ -63,7 +63,9 @@ export default function TeacherHome() {
                                 tabIndex="0"
                                 className="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800"
                             >
-                                {months[Math.abs(counter) % 12]}{' '}
+                                {counter >= 0
+                                    ? months[counter % 12]
+                                    : months[12 - Math.abs(counter % 12)]}{' '}
                                 {currentDate.getFullYear() +
                                     Math.floor(counter / 12)}
                             </span>
@@ -130,7 +132,11 @@ export default function TeacherHome() {
                                         currentDate.getFullYear() +
                                         Math.floor(counter / 12)
                                     }
-                                    month={Math.abs(counter) % 12}
+                                    month={
+                                        counter >= 0
+                                            ? counter % 12
+                                            : 12 - Math.abs(counter % 12)
+                                    }
                                     times={times}
                                     timesLocale={timesLocale}
                                 />
@@ -143,7 +149,11 @@ export default function TeacherHome() {
                         year={
                             currentDate.getFullYear() + Math.floor(counter / 12)
                         }
-                        month={Math.abs(counter) % 12}
+                        month={
+                            counter >= 0
+                                ? counter % 12
+                                : 12 - Math.abs(counter % 12)
+                        }
                     />
                 </div>
             </div>
