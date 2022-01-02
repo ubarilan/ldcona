@@ -104,6 +104,4 @@ export function initMainRouter(this: Ldcona): void {
         </form>
         `);
     });
-
-    router.get('/student', (req: Request, res: Response) => {});
 }
