@@ -1,6 +1,6 @@
 import Ldcona from '../../ldcona';
 import { Router, Request, Response } from 'express';
-import { Time, CensoredUser } from '../types';
+import { CensoredUser, CensoredTime } from '../types';
 
 export function initStudentRouter(this: Ldcona): void {
     this.studentRouter = Router();
@@ -36,8 +36,8 @@ export function initStudentRouter(this: Ldcona): void {
             return res.status(404).send({ status: 'teacher not found' });
 
         const getTimesSql: string =
-            'select id, timestamp, teacherNotes from times WHERE acquired IS NULL AND owner = ?;';
-        const times: Time[] = (
+            'select id, timestamp, teacherNotes, owner from times WHERE acquired IS NULL AND owner = ?;';
+        const times: CensoredTime[] = (
             await this.mysqlConnection.query(getTimesSql, req.params.id)
         )[0];
         res.send(times);
@@ -53,11 +53,11 @@ export function initStudentRouter(this: Ldcona): void {
                 return res.status(404).send({ status: 'teacher not found' });
 
             const getTimeSql: string =
-                'select id, timestamp, teacherNotes from times WHERE acquired IS NULL AND owner = ? AND id = ?;';
-            const time: Time = await this.getFirstQueryResult(getTimeSql, [
-                req.params.id,
-                req.params.timeid,
-            ]);
+                'select id, timestamp, teacherNotes, owner from times WHERE acquired IS NULL AND owner = ? AND id = ?;';
+            const time: CensoredTime = await this.getFirstQueryResult(
+                getTimeSql,
+                [req.params.id, req.params.timeid]
+            );
             if (!time)
                 return res.status(404).send({ status: 'time not found' });
 
@@ -75,11 +75,11 @@ export function initStudentRouter(this: Ldcona): void {
                 return res.status(404).send({ status: 'teacher not found' });
 
             const getTimeSql: string =
-                'select id, timestamp, teacherNotes from times WHERE acquired IS NULL AND owner = ? AND id = ?;';
-            const time: Time = await this.getFirstQueryResult(getTimeSql, [
-                req.params.id,
-                req.params.timeid,
-            ]);
+                'select id, timestamp, teacherNotes, owner from times WHERE acquired IS NULL AND owner = ? AND id = ?;';
+            const time: CensoredTime = await this.getFirstQueryResult(
+                getTimeSql,
+                [req.params.id, req.params.timeid]
+            );
             if (!time)
                 return res.status(404).send({ status: 'time not found' });
 
