@@ -13,6 +13,10 @@ import passport from 'passport';
 
 import initializePassport from './lib/passport-config';
 import { initMainRouter } from './lib/routers/main';
+import { initStudentRouter } from './lib/routers/student';
+
+// Import utility functions
+import { checkIfTeacherExists } from './lib/utils';
 
 // Configure environment variables
 config();
@@ -22,8 +26,13 @@ export default class Ldcona {
     protected mysqlConnection: Connection;
     protected webApp: Application;
     protected mainRouter: Router;
+    protected studentRouter: Router;
 
     private initMainRouter: () => void = initMainRouter;
+    private initStudentRouter: () => void = initStudentRouter;
+
+    // Utility functions
+    public checkIfTeacherExists = checkIfTeacherExists;
 
     constructor(
         database_host: string,
@@ -65,6 +74,7 @@ export default class Ldcona {
     // Initiate routers
     private initRouters(): void {
         this.initMainRouter();
+        this.initStudentRouter();
     }
 
     // Initiate web app
@@ -95,6 +105,7 @@ export default class Ldcona {
         this.webApp.use(passport.initialize());
         this.webApp.use(passport.session());
 
+        this.webApp.use('/api/student', this.studentRouter);
         this.webApp.use('/api', this.mainRouter);
 
         this.webApp.listen(this.listen_port, () => {

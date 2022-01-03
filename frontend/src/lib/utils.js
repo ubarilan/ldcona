@@ -12,3 +12,19 @@ export function getDateString(date, props) {
 export function getDaysInMonth(year, month) {
     return new Date(year, month, 1);
 }
+
+export function logout() {
+    fetch('/api/logout', { method: 'POST' });
+    window.location.href = '/';
+}
+
+export async function getUserInfo() {
+    const response = await fetch('/api/userinfo');
+    const userInfo = await response.json();
+
+    return userInfo;
+}
+
+export function classNames(...classes) {
+    return classes.filter(Boolean).join(' ');
+}

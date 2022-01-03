@@ -8,6 +8,13 @@ export interface Time {
     studentNotes?: null | string;
 }
 
+export interface CensoredTime {
+    id?: number;
+    timestamp?: number;
+    owner?: number;
+    teacherNotes?: null | string;
+}
+
 // Global type for req.user
 declare global {
     namespace Express {
