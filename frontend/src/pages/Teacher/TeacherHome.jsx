@@ -3,6 +3,7 @@ import Week from "@Components/Week";
 import Month from "@Components/Month";
 import Tasks from "@Components/Tasks";
 import { getDateString } from "@Lib/utils";
+import NewTask from "@Components/NewTask";
 
 export default function TeacherHome({ user }) {
   const months = [
@@ -124,6 +125,11 @@ export default function TeacherHome({ user }) {
               </table>
             </div>
           </div>
+          <NewTask
+            selectedDate={selectedDate}
+            year={currentDate.getFullYear() + Math.floor(counter / 12)}
+            month={Math.abs(counter) % 12}
+          />
           <Tasks
             times={times}
             selectedDate={selectedDate}
