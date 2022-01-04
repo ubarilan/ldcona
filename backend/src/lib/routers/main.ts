@@ -84,7 +84,7 @@ export function initMainRouter(this: Ldcona): void {
     "/times/remove/",
     this.checkAuthenticated,
     async (req: Request, res: Response) => {
-      let id: number = Number(req.body.timeID);
+      let id: number = Number(req.body.id);
       if (isNaN(id)) res.status(400).send({ status: "bad value" });
       else {
         let sql: string = "DELETE FROM times WHERE id = ?";

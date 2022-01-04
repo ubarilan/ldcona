@@ -20,6 +20,7 @@ export default function Tasks(props) {
                 acquired={time?.acquired || "Empty hour"}
                 studentNotes={time?.studentNotes}
                 key={i}
+                id={time.id}
               />
             );
           })}
