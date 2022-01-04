@@ -33,21 +33,22 @@ export default function NewTask(props) {
             placeholder="Student"
             aria-label="Student"
           />
-          <div class="mt-2 p-5 w-40 flex">
-            <p>Time</p>
+          <div class="mt-2 p-5 w-40 flex text-xl">
+            <p>Time &nbsp;</p>
             <div class="bg-gray-200">
               <input
                 type="text"
                 defaultValue="00"
-                class="h-3 w-5 bg-gray-200"
-                name="hours"
+                className="h-5 w-6 bg-gray-200 inliner"
+                name="hour"
               ></input>
-              <p>:</p>
+              <p className="inliner">&nbsp;:&nbsp;</p>
+
               <input
                 type="text"
                 defaultValue="00"
-                class="h-3 w-5 bg-gray-200"
-                name="minutes"
+                className="h-5 w-6 bg-gray-200 inliner"
+                name="minute"
               ></input>
               <input
                 name="timestamp"

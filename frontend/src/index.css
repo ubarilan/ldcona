@@ -3,26 +3,34 @@
 @tailwind utilities;
 
 .vertical-center {
-    margin-top: 10%;
+  margin-top: 10%;
 }
 
 .day-with-tasks {
-    background-image: radial-gradient(
-        circle at center,
-        #4338ca 5px,
-        transparent 5px
-    );
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
+  background-image: radial-gradient(
+    circle at center,
+    #4338ca 5px,
+    transparent 5px
+  );
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
 }
 
 .month-with-tasks {
-    background-image: radial-gradient(
-        circle at center,
-        #4338ca 5px,
-        transparent 5px
-    );
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-position: bottom;
+  background-image: radial-gradient(
+    circle at center,
+    #4338ca 5px,
+    transparent 5px
+  );
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.inliner {
+  display: inline-block;
+}
+
+.right {
+  float: right;
 }

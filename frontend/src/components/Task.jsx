@@ -4,19 +4,10 @@ export default function Task({ time, acquired, studentNotes, id }) {
   console.log(id);
   return (
     <div className="border-b pb-4 border-gray-400 border-dashed pt-5">
-      <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300">
+      <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300 inliner">
         {time}
       </p>
-      <p
-        tabIndex="0"
-        className="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2"
-      >
-        {acquired}
-      </p>
-      <p className="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">
-        {studentNotes}
-      </p>
-      <form method="POST" action="/api/times/remove">
+      <form method="POST" action="/api/times/remove" className="inliner right">
         <input type="hidden" name="id" value={id} />
         <button name="submit" type="submit">
           <svg
@@ -24,7 +15,7 @@ export default function Task({ time, acquired, studentNotes, id }) {
             className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            stroke="#ff0000"
           >
             <path
               strokeLinecap="round"
@@ -35,6 +26,15 @@ export default function Task({ time, acquired, studentNotes, id }) {
           </svg>
         </button>
       </form>
+      <p
+        tabIndex="0"
+        className="focus:outline-none text-lg font-medium leading-5 text-gray-800 dark:text-gray-100 mt-2"
+      >
+        {acquired}
+      </p>
+      <p className="text-sm pt-2 leading-4 leading-none text-gray-600 dark:text-gray-300">
+        {studentNotes}
+      </p>
     </div>
   );
 }
