@@ -5,8 +5,12 @@ export default function NewTask(props) {
   let [show, setShow] = useState(false);
 
   let date = getDateString(null, props);
-  date = date.split("/");
-  date = new Date(date[2], date[1] - 1, date[0]);
+  date = toTimestamp(date);
+
+  function toTimestamp(strDate) {
+    var datum = Date.parse(strDate);
+    return datum;
+  }
 
   function handleClick(event) {
     setShow(true);
@@ -18,25 +22,37 @@ export default function NewTask(props) {
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             type="text"
-            name=""
+            name="teacherNotes"
             placeholder="Meeting name"
             aria-label="Meeting name"
+          />
+          <input
+            class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            type="text"
+            name="acquired"
+            placeholder="Student"
+            aria-label="Student"
           />
           <div class="mt-2 p-5 w-40 flex">
             <p>Time</p>
             <div class="bg-gray-200">
               <input
                 type="text"
-                value="00"
+                defaultValue="00"
                 class="h-3 w-5 bg-gray-200"
                 name="hour"
               ></input>
               <p>:</p>
               <input
                 type="text"
-                value="00"
+                defaultValue="00"
                 class="h-3 w-5 bg-gray-200"
                 name="minute"
+              ></input>
+              <input
+                name="timestamp"
+                class="hidden"
+                defaultValue={date}
               ></input>
             </div>
           </div>
