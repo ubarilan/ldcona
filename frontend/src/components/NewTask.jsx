@@ -40,14 +40,14 @@ export default function NewTask(props) {
                 type="text"
                 defaultValue="00"
                 class="h-3 w-5 bg-gray-200"
-                name="hour"
+                name="hours"
               ></input>
               <p>:</p>
               <input
                 type="text"
                 defaultValue="00"
                 class="h-3 w-5 bg-gray-200"
-                name="minute"
+                name="minutes"
               ></input>
               <input
                 name="timestamp"

@@ -51,21 +51,20 @@ export function initMainRouter(this: Ldcona): void {
       let hours: number = Number(req.body.hours);
       let minutes: number = Number(req.body.minutes);
       let acquired: String = req.body.acquired;
-      console.log(timestamp);
+      console.log(timestamp, hours, minutes);
       if (
         isNaN(timestamp) ||
         isNaN(hours) ||
         isNaN(minutes) ||
         !acquired ||
-        req.body.hour < 0 ||
-        req.body.hour > 23 ||
-        req.body.minute < 0 ||
-        req.body.minute > 60
+        hours < 0 ||
+        hours > 23 ||
+        minutes < 0 ||
+        minutes > 60
       ) {
         res.status(400).send({ status: "bad value" });
       } else {
-        timestamp +=
-          req.body.hour * 60 * 60 * 1000 + req.body.minute * 60 * 1000;
+        timestamp += hours * 60 * 60 * 1000 + minutes * 60 * 1000;
         let sql: string =
           "INSERT INTO times(timestamp, owner, teacherNotes, acquired) VALUES(?, ?, ?, ?)";
         this.mysqlConnection.query(sql, [
@@ -74,7 +73,7 @@ export function initMainRouter(this: Ldcona): void {
           req.body.teacherNotes || null,
           acquired,
         ]);
-        res.send({ status: "success" });
+        res.redirect("/login-success");
       }
     }
   );
@@ -89,7 +88,7 @@ export function initMainRouter(this: Ldcona): void {
       else {
         let sql: string = "DELETE FROM times WHERE id = ?";
         let sqlResults = await this.mysqlConnection.query(sql, id);
-        if (sqlResults[0].affectedRows > 0) res.send({ status: "success" });
+        if (sqlResults[0].affectedRows > 0) res.redirect("/login-success");
         else res.status(404).send({ status: "time not found" });
       }
     }
