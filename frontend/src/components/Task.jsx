@@ -1,7 +1,6 @@
 import { React } from "react";
 
 export default function Task({ time, acquired, studentNotes, id }) {
-  console.log(id);
   return (
     <div className="border-b pb-4 border-gray-400 border-dashed pt-5">
       <p className="text-xs font-light leading-3 text-gray-500 dark:text-gray-300 inliner">
