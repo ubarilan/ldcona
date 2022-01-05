@@ -38,7 +38,7 @@ export default function NewTask(props) {
             <div class="bg-gray-200">
               <input
                 type="number"
-                defaultValue="0"
+                defaultValue="00"
                 min="00"
                 max="24"
                 className="h-5 w-9 bg-gray-200 inliner"
