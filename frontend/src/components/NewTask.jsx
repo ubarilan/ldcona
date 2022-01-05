@@ -22,32 +22,37 @@ export default function NewTask(props) {
           <input
             class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             type="text"
-            name="teacherNotes"
-            placeholder="Meeting name"
-            aria-label="Meeting name"
-          />
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="text"
             name="acquired"
             placeholder="Student"
             aria-label="Student"
           />
-          <div class="mt-2 p-5 w-40 flex text-xl">
+          <input
+            class="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            type="text"
+            name="teacherNotes"
+            placeholder="Meeting notes"
+            aria-label="Meeting notes"
+          />
+          <div class="mt-2 p-5 w-100 flex text-xl">
             <p>Time &nbsp;</p>
             <div class="bg-gray-200">
               <input
-                type="text"
-                defaultValue="00"
-                className="h-5 w-6 bg-gray-200 inliner"
+                type="number"
+                defaultValue="0"
+                min="00"
+                max="24"
+                className="h-5 w-9 bg-gray-200 inliner"
                 name="hour"
               ></input>
-              <p className="inliner">&nbsp;:&nbsp;</p>
+              <p className="inliner">:&nbsp;</p>
 
               <input
-                type="text"
+                type="number"
                 defaultValue="00"
-                className="h-5 w-6 bg-gray-200 inliner"
+                min="00"
+                max="59"
+                defaultValue="00"
+                className="h-5 w-9 bg-gray-200 inliner"
                 name="minute"
               ></input>
               <input

@@ -48,10 +48,9 @@ export function initMainRouter(this: Ldcona): void {
     this.checkAuthenticated,
     async (req: Request, res: Response) => {
       let timestamp: number = Number(req.body.timestamp);
-      let hours: number = Number(req.body.hours);
-      let minutes: number = Number(req.body.minutes);
+      let hours: number = Number(req.body.hour);
+      let minutes: number = Number(req.body.minute);
       let acquired: String = req.body.acquired;
-      console.log(timestamp, hours, minutes);
       if (
         isNaN(timestamp) ||
         isNaN(hours) ||
@@ -62,6 +61,7 @@ export function initMainRouter(this: Ldcona): void {
         minutes < 0 ||
         minutes > 60
       ) {
+        console.log(timestamp, hours, minutes, acquired);
         res.status(400).send({ status: "bad value" });
       } else {
         timestamp += hours * 60 * 60 * 1000 + minutes * 60 * 1000;
