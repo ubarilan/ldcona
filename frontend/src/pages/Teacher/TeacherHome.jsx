@@ -63,7 +63,9 @@ export default function TeacherHome({ user }) {
                 tabIndex="0"
                 className="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800"
               >
-                {months[Math.abs(counter) % 12]}{" "}
+                {counter >= 0
+                  ? months[Math.abs(counter) % 12]
+                  : months[12 - (Math.abs(counter) % 12)]}{" "}
                 {currentDate.getFullYear() + Math.floor(counter / 12)}
               </span>
               <div className="flex items-center">
@@ -118,7 +120,11 @@ export default function TeacherHome({ user }) {
                   selectedDate={selectedDate}
                   setSelectedDate={setSelectedDate}
                   year={currentDate.getFullYear() + Math.floor(counter / 12)}
-                  month={Math.abs(counter) % 12}
+                  month={
+                    counter >= 0
+                      ? Math.abs(counter) % 12
+                      : 12 - (Math.abs(counter) % 12)
+                  }
                   times={times}
                   timesLocale={timesLocale}
                 />
@@ -128,13 +134,21 @@ export default function TeacherHome({ user }) {
           <NewTask
             selectedDate={selectedDate}
             year={currentDate.getFullYear() + Math.floor(counter / 12)}
-            month={Math.abs(counter) % 12}
+            month={
+              counter >= 0
+                ? Math.abs(counter) % 12
+                : 12 - (Math.abs(counter) % 12)
+            }
           />
           <Tasks
             times={times}
             selectedDate={selectedDate}
             year={currentDate.getFullYear() + Math.floor(counter / 12)}
-            month={Math.abs(counter) % 12}
+            month={
+              counter >= 0
+                ? Math.abs(counter) % 12
+                : 12 - (Math.abs(counter) % 12)
+            }
           />
         </div>
       </div>
