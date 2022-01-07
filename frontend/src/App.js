@@ -13,6 +13,7 @@ import TeacherHome from "@Pages/Teacher/TeacherHome.jsx";
 import Logout from "@Pages/Logout";
 import Navbar from "@Components/Navbar";
 import Team from "@Pages/Team";
+import Settings from "@Pages/Settings";
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -49,6 +50,7 @@ export default function App() {
             element={<TeacherHome user={currentUser} />}
           />
           <Route path="/Team" element={<Team />} />
+          <Route path="/Settings" element={<Settings user={currentUser} />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>
