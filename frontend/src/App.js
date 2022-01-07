@@ -12,6 +12,7 @@ import Login from "@Pages/Login";
 import TeacherHome from "@Pages/Teacher/TeacherHome.jsx";
 import Logout from "@Pages/Logout";
 import Navbar from "@Components/Navbar";
+import Team from "@Pages/Team";
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -47,6 +48,7 @@ export default function App() {
             path="/teacherhome"
             element={<TeacherHome user={currentUser} />}
           />
+          <Route path="/Team" element={<Team />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>

@@ -42,6 +42,17 @@ export function initMainRouter(this: Ldcona): void {
     }
   );
 
+  //Show all teachers from database
+  router.get("/teachers", async (req: Request, res: Response) => {
+    let sql: string = "SELECT * FROM users";
+    let teachers: CensoredUser[] = (await this.mysqlConnection.query(sql))[0];
+    teachers.map((teacher) => {
+      delete teacher.password;
+      delete teacher.email;
+    });
+    res.send(teachers);
+  });
+
   // Add a time to the database
   router.post(
     "/times/add",
@@ -95,7 +106,7 @@ export function initMainRouter(this: Ldcona): void {
   );
 
   // Peace of fucking garbage, will not be used in final form after frontend is added. frontend is shit
-  router.get("/teacher", (req: Request, res: Response) => {
+  router.get("/teacherr", (req: Request, res: Response) => {
     res.send(`
         <form action="/login" method="post">
         <input name="email" id="email" placeholder="">

@@ -3,9 +3,6 @@ import { Fragment } from "react";
 import { classNames } from "@Lib/utils";
 
 export default function UserDropDownMenu({ user }) {
-  console.log(
-    `https://ui-avatars.com/api/?name=${user.fistName}+${user.lastName}&size=256&background=fff&color=5f72e4`
-  );
   return (
     <Menu as="div" className="ml-3 relative">
       <div>
