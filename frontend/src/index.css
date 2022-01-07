@@ -33,4 +33,5 @@
 
 .right {
   float: right;
+  direction: rtl;
 }
