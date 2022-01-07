@@ -13,7 +13,7 @@ export default function Team() {
   const [classes, setClasses] = useState(["ז", "ח", "ט", "י", "יא", "יב"]);
   return (
     <div className="flex items-center justify-center py-8 px-4">
-      <div className="max-w-lg w-full shadow-lg right">
+      <div className="max-w-lg w-full shadow-lg right ">
         {teachers.map((teacher, index) => (
           <div className="inliner" id={index}>
             <img
