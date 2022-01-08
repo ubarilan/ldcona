@@ -14,7 +14,7 @@ export default function Settings({ user }) {
     const formData = new FormData();
     formData.append("file", FileUploaded, user.id);
     console.log(FileUploaded);
-    axios.post("/api/upload/profilepicture").catch((err) => {
+    axios.post("/api/upload/profilepicture", formData).catch((err) => {
       return (
         <h1 class="font-bold">
           There has been an error uploading your profile picture: {err}
