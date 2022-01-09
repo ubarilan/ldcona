@@ -7,7 +7,7 @@ import Logout from "@Pages/Logout";
 import Team from "@Pages/Team";
 import Settings from "@Pages/Settings";
 
-export const UnAuthorizedUsersRoutes = (currentUser) => {
+export const UnAuthorizedUsersRoutes = () => {
   return (
     <>
       <Route path="/" element={<Home />} />
@@ -34,7 +34,7 @@ export const AuthorizedUsersRoutes = (currentUser) => {
       />
       <Route path="/teacherhome" element={<TeacherHome user={currentUser} />} />{" "}
       <Route path="/login" element={<TeacherHome />} />
-      {UnAuthorizedUsersRoutes(currentUser)}
+      {UnAuthorizedUsersRoutes()}
     </>
   );
 };
