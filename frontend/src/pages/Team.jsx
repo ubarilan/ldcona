@@ -18,7 +18,9 @@ export default function Team() {
     <div className="flex items-center justify-center py-8 px-4">
       <div className="max-w-lg w-full shadow-lg right  text-white ">
         {teachers.map((teacher, index) => (
-          <Teacher index={index} teacher={teacher} grade={classes[index]} />
+          <div className="inliner" key={index}>
+            <Teacher teacher={teacher} grade={classes[index]} />
+          </div>
         ))}
       </div>
     </div>
