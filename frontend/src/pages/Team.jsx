@@ -18,7 +18,10 @@ export default function Team() {
     <div className="flex items-center justify-center py-8 px-4">
       <div className="max-w-lg w-full shadow-lg right  text-white ">
         {teachers.map((teacher, index) => (
-          <div className="inliner" key={index}>
+          <div
+            className="inliner mx-auto text-white rounded transition duration-500 ease-in-out hover:bg-green-400 transform hover:-translate-y-1 rounded-xl"
+            key={index}
+          >
             <Teacher teacher={teacher} grade={classes[index]} />
           </div>
         ))}
