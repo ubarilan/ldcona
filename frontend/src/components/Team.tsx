@@ -1,6 +1,6 @@
 import Translation from '../translation.json';
-
-export default function Team({ teachers }) {
+import { User } from '../lib/types';
+export default function Team({ teachers }: { teachers: User[] }) {
     teachers.sort((a, b) => (a.grade > b.grade ? 1 : -1));
     return (
         <div className="bg-gray-50">

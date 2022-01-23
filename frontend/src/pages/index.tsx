@@ -4,22 +4,16 @@ import Team from '../components/Team';
 import Footer from '../components/Footer';
 import callApi from '../lib/callApi';
 import Translation from '../translation.json';
-export async function getServerSideProps() {
-    const teachers = await callApi('/teachers');
-    return {
-        props: {
-            teachers,
-        },
-    };
-}
+import { GetServerSideProps } from 'next';
+import { User } from '../lib/types';
 
-export default function Home({ teachers }) {
+export default function Home({ teachers }: { teachers: User[] }) {
     return (
         <>
             <Head>
                 <link rel="icon" href="/img/favicon.ico" />
                 <title>
-                    {Translation.consultans_system} | {Translation.lady_davis}
+                    {Translation.consultants_system} | {Translation.lady_davis}
                 </title>
             </Head>
             <Hero />
@@ -28,3 +22,11 @@ export default function Home({ teachers }) {
         </>
     );
 }
+export const getServerSideProps: GetServerSideProps = async () => {
+    const teachers = await callApi('/teachers');
+    return {
+        props: {
+            teachers,
+        },
+    };
+};

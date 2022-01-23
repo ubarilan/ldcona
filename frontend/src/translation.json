@@ -3,8 +3,11 @@
     "meetings": "פגישות",
     "team": "צוות",
     "calendar": "מערכת שעות",
-    "consultans_system": "מערכת היועצות",
+    "consultants_system": "מערכת היועצות",
     "of": "של",
     "lady_davis": "ליידי דייויס",
-    "login": "התחברות"
+    "login": "התחברות",
+    "consultants_system_description": "מערכת היועצות של ליידי דייויס היא פלטפורמה לקביעת פגישות בין תלמידים לחברי צוות של בית הספר ליידי דייויס",
+    "set_appointment": "לקביעת פגישה",
+    "staff_login": "כניסת צוות"
 }
