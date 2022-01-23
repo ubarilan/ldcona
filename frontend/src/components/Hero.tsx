@@ -1,11 +1,13 @@
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import Link from 'next/link';
+import Translation from '../translation.json';
 
 const navigation = [
-    { name: 'פגישות', href: '/meetings' },
-    { name: 'מערכת שעות', href: '/calendar' },
-    { name: 'צוות', href: '/team' },
+    { name: Translation.team, href: '/team' },
+    { name: Translation.calendar, href: '/calendar' },
+    { name: Translation.meetings, href: '/meetings' },
 ];
 
 export default function Hero() {
@@ -98,10 +100,10 @@ export default function Hero() {
                                     <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
                                         <span className="inline-flex rounded-md shadow">
                                             <a
-                                                href="#"
+                                                href="/login"
                                                 className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-rabi-600 bg-white hover:bg-gray-50"
                                             >
-                                                התחברות
+                                                {Translation.login}
                                             </a>
                                         </span>
                                     </div>
@@ -120,22 +122,23 @@ export default function Hero() {
                             </div>
                             <div className="hidden md:flex md:space-x-10">
                                 {navigation.map((item, i) => (
-                                    <a
-                                        key={`consultant-${i}`}
-                                        href={item.href}
-                                        className="font-medium text-gray-500 hover:text-gray-900"
-                                    >
-                                        {item.name}
-                                    </a>
+                                    <Link href={item.href} key={i}>
+                                        <a className="font-medium text-gray-500 hover:text-gray-900">
+                                            {item.name}
+                                        </a>
+                                    </Link>
                                 ))}
                             </div>
-                            <a href="#">
-                                <img
-                                    className="lg:h-8 w-auto xl:h-10 md:h-5 select-none md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0"
-                                    src="/img/logo.png"
-                                    alt=""
-                                />
-                            </a>
+                            {/* Panel logo on top right */}
+                            <Link href="/">
+                                <a>
+                                    <img
+                                        className="lg:h-8 w-auto xl:h-10 md:h-5 select-none md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0"
+                                        src="/img/logo.png"
+                                        alt="Top right logo"
+                                    />
+                                </a>
+                            </Link>
                         </nav>
                     </div>
 
@@ -157,13 +160,13 @@ export default function Hero() {
                                 dir="rtl"
                             >
                                 <div className="px-5 pt-4 flex items-center justify-between">
-                                    <div>
-                                        <img
-                                            className="h-8 w-auto select-none"
-                                            src="/img/logo.png"
-                                            alt=""
-                                        />
-                                    </div>
+                                    {/* Used while clicked on menu button */}
+                                    <img
+                                        className="h-8 w-auto select-none"
+                                        src="/img/logo.png"
+                                        alt=""
+                                        width={193.16}
+                                    />
                                     <div className="-mr-2">
                                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rabi-500">
                                             <span className="sr-only">
@@ -177,21 +180,26 @@ export default function Hero() {
                                     </div>
                                 </div>
                                 <div className="px-2 pt-2 pb-3">
-                                    {navigation.reverse().map((item) => (
-                                        <a
-                                            key={item.name}
+                                    {navigation.map((item, i) => (
+                                        <Link
                                             href={item.href}
-                                            className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                            key={`navlink-${i}`}
                                         >
-                                            {item.name}
-                                        </a>
+                                            <a
+                                                key={item.name}
+                                                href={item.href}
+                                                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                                            >
+                                                {item.name}
+                                            </a>
+                                        </Link>
                                     ))}
                                 </div>
                                 <a
-                                    href="#"
+                                    href="/login"
                                     className="block w-full px-5 py-3 text-center font-medium text-rabi-600 bg-gray-50 hover:bg-gray-100"
                                 >
-                                    התחברות
+                                    {Translation.login}
                                 </a>
                             </div>
                         </Popover.Panel>
@@ -202,10 +210,10 @@ export default function Hero() {
                     <div className="text-center">
                         <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                             <span className="block xl:inline">
-                                מערכת היועצות של
+                                {Translation.consultans_system} {Translation.of}
                             </span>{' '}
                             <span className="block text-rabi-600 xl:inline">
-                                ליידי דייויס
+                                {Translation.lady_davis}
                             </span>
                         </h1>
                         <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
@@ -215,20 +223,18 @@ export default function Hero() {
                         </p>
                         <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
                             <div className="rounded-md shadow">
-                                <a
-                                    href="#"
-                                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-rabi-600 hover:bg-rabi-700 md:py-4 md:text-lg md:px-10"
-                                >
-                                    Get started
-                                </a>
+                                <Link href="#">
+                                    <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-rabi-600 hover:bg-rabi-700 md:py-4 md:text-lg md:px-10">
+                                        Get started
+                                    </a>
+                                </Link>
                             </div>
                             <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                                <a
-                                    href="#"
-                                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-rabi-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
-                                >
-                                    Live demo
-                                </a>
+                                <Link href="#">
+                                    <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-rabi-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
+                                        Live demo
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

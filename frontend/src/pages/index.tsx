@@ -3,7 +3,7 @@ import Hero from '../components/Hero';
 import Team from '../components/Team';
 import Footer from '../components/Footer';
 import callApi from '../lib/callApi';
-
+import Translation from '../translation.json';
 export async function getServerSideProps() {
     const teachers = await callApi('/teachers');
     return {
@@ -18,7 +18,9 @@ export default function Home({ teachers }) {
         <>
             <Head>
                 <link rel="icon" href="/img/favicon.ico" />
-                <title>מערכת יועצות // ליידי דייויס</title>
+                <title>
+                    {Translation.consultans_system} | {Translation.lady_davis}
+                </title>
             </Head>
             <Hero />
             <Team teachers={teachers} />

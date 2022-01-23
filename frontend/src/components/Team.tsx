@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-import Axios from 'axios';
-import callApi from '../lib/callApi';
+import Translation from '../translation.json';
 
 export default function Team({ teachers }) {
     teachers.sort((a, b) => (a.grade > b.grade ? 1 : -1));
@@ -37,7 +35,7 @@ export default function Team({ teachers }) {
                     </div>
                     <div className="space-y-5 sm:space-y-4">
                         <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-                            הכירו את ה"צוות" שלנו
+                            {Translation.meet_our_team}
                         </h2>
                         <p className="text-xl text-gray-500">
                             Libero fames augue nisl porttitor nisi, quis. Id ac
