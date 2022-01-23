@@ -15,6 +15,8 @@ export interface CensoredTime {
     teacherNotes?: null | string;
 }
 
+type grade = 1 | 2 | 3 | 4 | 5 | 6;
+
 // Global type for req.user
 declare global {
     namespace Express {
@@ -24,6 +26,8 @@ declare global {
             lastName: string;
             email: string;
             password: string;
+            grade: grade | null;
+            title: string;
         }
     }
 }
@@ -34,4 +38,6 @@ export interface CensoredUser {
     lastName: string;
     email: string;
     password?: string;
+    grade: grade | null;
+    title: string;
 }
