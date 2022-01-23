@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Hero from '../components/Hero';
+import Hero from '../components/MainPage';
 import Team from '../components/Team';
 import Footer from '../components/Footer';
 import callApi from '../lib/callApi';
