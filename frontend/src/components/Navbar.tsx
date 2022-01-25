@@ -23,9 +23,7 @@ export default function Navbar({ user }: { user: User | null }) {
                             className="flex items-center justify-between w-full md:w-auto"
                             dir="rtl"
                         >
-                            {' '}
                             {!user ? (
-                                // Login
                                 <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
                                     <span className="inline-flex rounded-md shadow">
                                         <a
@@ -37,8 +35,16 @@ export default function Navbar({ user }: { user: User | null }) {
                                     </span>
                                 </div>
                             ) : (
-                                // Logout
-                                <></>
+                                <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
+                                    <span className="inline-flex rounded-md shadow">
+                                        <a
+                                            href="/login"
+                                            className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-rabi-600 bg-white hover:bg-gray-50"
+                                        >
+                                            {Translation.logout}
+                                        </a>
+                                    </span>
+                                </div>
                             )}
                             <div className="-mr-2 flex items-center md:hidden">
                                 <Popover.Button className="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-rabi-500">
