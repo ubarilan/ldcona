@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 const DynamicNav = dynamic(() => import('./Navbar'), { ssr: false });
 export default function PageWrapper({ children, user }) {
     return (
-        <>
+        <div className="flex flex-col h-screen justify-between bg-gray-50">
             <Head>
                 <link rel="icon" href="/img/favicon.ico" />
                 <title>
@@ -15,7 +15,7 @@ export default function PageWrapper({ children, user }) {
                 </title>
             </Head>
 
-            <div className="relative bg-gray-50 overflow-hidden">
+            <div className="relative overflow-hidden">
                 <div className="relative pt-6 pb-16 sm:pb-24">
                     <DynamicNav user={user} />
                     {children}
@@ -23,6 +23,6 @@ export default function PageWrapper({ children, user }) {
             </div>
 
             <Footer />
-        </>
+        </div>
     );
 }
