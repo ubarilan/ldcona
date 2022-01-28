@@ -14,3 +14,11 @@ export interface Button {
     name: string;
     href: string;
 }
+
+export interface Task {
+    id: number;
+    name: string;
+    studentNotes: string;
+    teacherNotes: string;
+    date: string;
+}

@@ -1,5 +1,6 @@
 import Calendar from 'react-calendar';
 import React, { useState } from 'react';
+import { Task } from '../lib/types';
 
 export default function CalendarComponent() {
     const [value, onChange] = useState(new Date());

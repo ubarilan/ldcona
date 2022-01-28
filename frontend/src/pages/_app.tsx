@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }) {
     };
     const [user, setUser] = useUser(exampleUser);
     // setUser(exampleUser);
-    console.log('user', user);
 
     return (
         <PageWrapper user={user}>
