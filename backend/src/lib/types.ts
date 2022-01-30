@@ -16,7 +16,15 @@ export interface CensoredTime {
 }
 
 type grade = 1 | 2 | 3 | 4 | 5 | 6;
-
+export interface User {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    grade: grade | null;
+    title: string;
+}
 // Global type for req.user
 declare global {
     namespace Express {

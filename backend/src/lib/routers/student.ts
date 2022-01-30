@@ -1,6 +1,7 @@
 import Ldcona from '../../ldcona';
 import { Router, Request, Response } from 'express';
-import { CensoredUser, CensoredTime } from '../types';
+import { CensoredUser, CensoredTime, Time, User } from '../types';
+import { censorTime, censorUser } from '../utils';
 
 export function initStudentRouter(this: Ldcona): void {
     this.studentRouter = Router();
@@ -10,19 +11,19 @@ export function initStudentRouter(this: Ldcona): void {
         const sql: string = 'SELECT id, firstName, lastName, email FROM users;';
         const teachers: CensoredUser[] = (
             await this.mysqlConnection.query(sql)
-        )[0];
+        )[0].map((teacher: User) => censorUser(teacher));
         res.send(teachers);
     });
 
     router.get('/teachers/:id', async (req: Request, res: Response) => {
         const sql: string =
             'SELECT id, firstName, lastName, email FROM users WHERE id = ?;';
-        const teacher: CensoredUser = await this.getFirstQueryResult(
+        const teacher: User = await this.getFirstQueryResult(
             sql,
             req.params.id
         );
         if (teacher) {
-            res.send(teacher);
+            res.send(censorUser(teacher));
         } else {
             res.status(404).send({ status: 'teacher not found' });
         }
@@ -39,7 +40,7 @@ export function initStudentRouter(this: Ldcona): void {
             'select id, timestamp, teacherNotes, owner from times WHERE acquired IS NULL AND owner = ?;';
         const times: CensoredTime[] = (
             await this.mysqlConnection.query(getTimesSql, req.params.id)
-        )[0];
+        )[0].map((time: Time) => censorTime(time));
         res.send(times);
     });
 
@@ -54,9 +55,11 @@ export function initStudentRouter(this: Ldcona): void {
 
             const getTimeSql: string =
                 'select id, timestamp, teacherNotes, owner from times WHERE acquired IS NULL AND owner = ? AND id = ?;';
-            const time: CensoredTime = await this.getFirstQueryResult(
-                getTimeSql,
-                [req.params.id, req.params.timeid]
+            const time: CensoredTime = censorTime(
+                await this.getFirstQueryResult(getTimeSql, [
+                    req.params.id,
+                    req.params.timeid,
+                ])
             );
             if (!time)
                 return res.status(404).send({ status: 'time not found' });
@@ -94,7 +97,6 @@ export function initStudentRouter(this: Ldcona): void {
             const updated: boolean = sqlResults[0].affectedRows > 0;
             if (updated) res.send({ status: 'success' });
             else res.status(500).send({ status: 'error' });
-            debugger;
         }
     );
 }

@@ -1,5 +1,5 @@
 import Ldcona from '../ldcona';
-import { CensoredUser } from './types';
+import { CensoredTime, CensoredUser, Time, User } from './types';
 
 export async function checkIfTeacherExists(
     this: Ldcona,
@@ -10,4 +10,17 @@ export async function checkIfTeacherExists(
     const teacher: CensoredUser = await this.getFirstQueryResult(sql, id);
 
     return !!teacher;
+}
+
+export function censorTime(time: Time): CensoredTime {
+    const censoredTime: Time = Object.assign({}, time);
+    delete censoredTime.studentNotes;
+    delete censoredTime.acquired;
+    return censoredTime as CensoredTime;
+}
+
+export function censorUser(user: User): CensoredUser {
+    const censoredUser: User = Object.assign({}, user);
+    delete censoredUser.password;
+    return censoredUser as CensoredUser;
 }

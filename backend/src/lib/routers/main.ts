@@ -1,113 +1,113 @@
-import Ldcona from "../../ldcona";
-import e, { Router, Request, Response, NextFunction } from "express";
-import { Time, CensoredUser } from "../types";
+import Ldcona from '../../ldcona';
+import { Router, Request, Response } from 'express';
+import { Time, CensoredUser, User } from '../types';
+import { censorUser } from '../utils';
 
 export function initMainRouter(this: Ldcona): void {
-  this.mainRouter = Router();
-  const router: Router = this.mainRouter;
+    this.mainRouter = Router();
+    const router: Router = this.mainRouter;
 
-  // Login endpoint
-  router.post(
-    "/login",
-    this.passport.authenticate("local", {
-      successRedirect: "/login-success",
-      failureRedirect: "/login-fail",
-    })
-  );
+    // Login endpoint
+    router.post(
+        '/login',
+        this.passport.authenticate('local', {
+            successRedirect: '/login-success',
+            failureRedirect: '/login-fail',
+        })
+    );
 
-  // Logout endpoint
-  router.post("/logout", (req: Request, res: Response) => {
-    req.logout();
-    res.redirect("/");
-  });
-
-  router.get("/userinfo", (req: Request, res: Response) => {
-    if (req.user) {
-      let censoredUserObject: CensoredUser = Object.assign({}, req.user);
-      delete censoredUserObject.password;
-      res.send({ user: censoredUserObject });
-    } else res.send({ user: null });
-  });
-
-  // Show avilabile times of the teachers
-  router.get(
-    "/times",
-    this.checkAuthenticated,
-    async (req: Request, res: Response) => {
-      let sql: string = "SELECT * FROM times WHERE owner = ?";
-      let userTimes: Time[] = (
-        await this.mysqlConnection.query(sql, req.user.id)
-      )[0];
-      res.send(userTimes);
-    }
-  );
-
-  //Show all teachers from database
-  router.get("/teachers", async (req: Request, res: Response) => {
-    let sql: string = "SELECT * FROM users";
-    let teachers: CensoredUser[] = (await this.mysqlConnection.query(sql))[0];
-    teachers.map((teacher) => {
-      delete teacher.password;
-      delete teacher.email;
+    // Logout endpoint
+    router.post('/logout', (req: Request, res: Response) => {
+        req.logout();
+        res.redirect('/');
     });
-    res.send(teachers);
-  });
 
-  // Add a time to the database
-  router.post(
-    "/times/add",
-    this.checkAuthenticated,
-    async (req: Request, res: Response) => {
-      let timestamp: number = Number(req.body.timestamp);
-      let hours: number = Number(req.body.hour);
-      let minutes: number = Number(req.body.minute);
-      let acquired: String = req.body.acquired;
-      if (
-        isNaN(timestamp) ||
-        isNaN(hours) ||
-        isNaN(minutes) ||
-        !acquired ||
-        hours < 0 ||
-        hours > 23 ||
-        minutes < 0 ||
-        minutes > 60
-      ) {
-        console.log(timestamp, hours, minutes, acquired);
-        res.status(400).send({ status: "bad value" });
-      } else {
-        timestamp += hours * 60 * 60 * 1000 + minutes * 60 * 1000;
-        let sql: string =
-          "INSERT INTO times(timestamp, owner, teacherNotes, acquired) VALUES(?, ?, ?, ?)";
-        this.mysqlConnection.query(sql, [
-          timestamp,
-          req.user.id,
-          req.body.teacherNotes || null,
-          acquired,
-        ]);
-        res.redirect("/login-success");
-      }
-    }
-  );
+    router.get('/userinfo', (req: Request, res: Response) => {
+        if (req.user) {
+            let censoredUserObject: CensoredUser = censorUser(req.user);
+            res.send({ user: censoredUserObject });
+        } else res.send({ user: null });
+    });
 
-  // Remove a time from the database
-  router.post(
-    "/times/remove/",
-    this.checkAuthenticated,
-    async (req: Request, res: Response) => {
-      let id: number = Number(req.body.id);
-      if (isNaN(id)) res.status(400).send({ status: "bad value" });
-      else {
-        let sql: string = "DELETE FROM times WHERE id = ?";
-        let sqlResults = await this.mysqlConnection.query(sql, id);
-        if (sqlResults[0].affectedRows > 0) res.redirect("/login-success");
-        else res.status(404).send({ status: "time not found" });
-      }
-    }
-  );
+    // Show avilabile times of the teachers
+    router.get(
+        '/times',
+        this.checkAuthenticated,
+        async (req: Request, res: Response) => {
+            let sql: string = 'SELECT * FROM times WHERE owner = ?';
+            let userTimes: Time[] = (
+                await this.mysqlConnection.query(sql, req.user.id)
+            )[0];
+            res.send(userTimes);
+        }
+    );
 
-  // Peace of fucking garbage, will not be used in final form after frontend is added. frontend is shit
-  router.get("/teacherr", (req: Request, res: Response) => {
-    res.send(`
+    // Show all teachers from database
+    router.get('/teachers', async (req: Request, res: Response) => {
+        let sql: string = 'SELECT * FROM users';
+        let teachers: CensoredUser[] = (
+            await this.mysqlConnection.query(sql)
+        )[0].map((teacher: User) => censorUser(teacher));
+
+        res.send(teachers);
+    });
+
+    // Add a time to the database
+    router.post(
+        '/times/add',
+        this.checkAuthenticated,
+        async (req: Request, res: Response) => {
+            let timestamp: number = Number(req.body.timestamp);
+            let hours: number = Number(req.body.hour);
+            let minutes: number = Number(req.body.minute);
+            let acquired: String = req.body.acquired;
+            if (
+                isNaN(timestamp) ||
+                isNaN(hours) ||
+                isNaN(minutes) ||
+                !acquired ||
+                hours < 0 ||
+                hours > 23 ||
+                minutes < 0 ||
+                minutes > 60
+            ) {
+                console.log(timestamp, hours, minutes, acquired);
+                res.status(400).send({ status: 'bad value' });
+            } else {
+                timestamp += hours * 60 * 60 * 1000 + minutes * 60 * 1000;
+                let sql: string =
+                    'INSERT INTO times(timestamp, owner, teacherNotes, acquired) VALUES(?, ?, ?, ?)';
+                this.mysqlConnection.query(sql, [
+                    timestamp,
+                    req.user.id,
+                    req.body.teacherNotes || null,
+                    acquired,
+                ]);
+                res.redirect('/login-success');
+            }
+        }
+    );
+
+    // Remove a time from the database
+    router.post(
+        '/times/remove/',
+        this.checkAuthenticated,
+        async (req: Request, res: Response) => {
+            let id: number = Number(req.body.id);
+            if (isNaN(id)) res.status(400).send({ status: 'bad value' });
+            else {
+                let sql: string = 'DELETE FROM times WHERE id = ?';
+                let sqlResults = await this.mysqlConnection.query(sql, id);
+                if (sqlResults[0].affectedRows > 0)
+                    res.redirect('/login-success');
+                else res.status(404).send({ status: 'time not found' });
+            }
+        }
+    );
+
+    // Peace of fucking garbage, will not be used in final form after frontend is added. frontend is shit
+    router.get('/teacherr', (req: Request, res: Response) => {
+        res.send(`
         <form action="/login" method="post">
         <input name="email" id="email" placeholder="">
         <input name="password" type="password" id="password" placeholder="">
@@ -129,5 +129,5 @@ export function initMainRouter(this: Ldcona): void {
         <input type="submit">
         </form>
         `);
-  });
+    });
 }
