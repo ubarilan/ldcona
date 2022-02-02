@@ -58,32 +58,19 @@ export function initMainRouter(this: Ldcona): void {
         this.checkAuthenticated,
         async (req: Request, res: Response) => {
             let timestamp: number = Number(req.body.timestamp);
-            let hours: number = Number(req.body.hour);
-            let minutes: number = Number(req.body.minute);
-            let acquired: String = req.body.acquired;
-            if (
-                isNaN(timestamp) ||
-                isNaN(hours) ||
-                isNaN(minutes) ||
-                !acquired ||
-                hours < 0 ||
-                hours > 23 ||
-                minutes < 0 ||
-                minutes > 60
-            ) {
-                console.log(timestamp, hours, minutes, acquired);
+            let student: String = req.body.student || null;
+            if (isNaN(timestamp)) {
                 res.status(400).send({ status: 'bad value' });
             } else {
-                timestamp += hours * 60 * 60 * 1000 + minutes * 60 * 1000;
                 let sql: string =
                     'INSERT INTO times(timestamp, owner, teacherNotes, acquired) VALUES(?, ?, ?, ?)';
                 this.mysqlConnection.query(sql, [
                     timestamp,
                     req.user.id,
                     req.body.teacherNotes || null,
-                    acquired,
+                    student,
                 ]);
-                res.redirect('/login-success');
+                res.send({ status: 'ok' });
             }
         }
     );
@@ -98,8 +85,7 @@ export function initMainRouter(this: Ldcona): void {
             else {
                 let sql: string = 'DELETE FROM times WHERE id = ?';
                 let sqlResults = await this.mysqlConnection.query(sql, id);
-                if (sqlResults[0].affectedRows > 0)
-                    res.redirect('/login-success');
+                if (sqlResults[0].affectedRows > 0) res.send({ status: 'ok' });
                 else res.status(404).send({ status: 'time not found' });
             }
         }
@@ -108,13 +94,13 @@ export function initMainRouter(this: Ldcona): void {
     // Peace of fucking garbage, will not be used in final form after frontend is added. frontend is shit
     router.get('/teacherr', (req: Request, res: Response) => {
         res.send(`
-        <form action="/login" method="post">
+        <form action="/api/login" method="post">
         <input name="email" id="email" placeholder="">
         <input name="password" type="password" id="password" placeholder="">
         <input type="submit">
         </form>
 
-        <form action="/logout" method="post">
+        <form action="/api/logout" method="post">
         <button type="submit">logout</button>
         </form>
 

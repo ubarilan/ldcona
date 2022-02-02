@@ -95,7 +95,7 @@ export function initStudentRouter(this: Ldcona): void {
                 req.params.timeid,
             ]);
             const updated: boolean = sqlResults[0].affectedRows > 0;
-            if (updated) res.send({ status: 'success' });
+            if (updated) res.send({ status: 'ok' });
             else res.status(500).send({ status: 'error' });
         }
     );
