@@ -11,6 +11,9 @@ export default function Navbar({ user }: { user: User | null }) {
         { name: Translation.calendar, href: '/calendar' },
         { name: Translation.meetings, href: '/meetings' },
     ];
+
+    // user && buttons.push({ name: Translation.hello, href: '/profile' });
+
     return (
         <Popover>
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -38,7 +41,7 @@ export default function Navbar({ user }: { user: User | null }) {
                                 <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
                                     <span className="inline-flex rounded-md shadow">
                                         <a
-                                            href="/login"
+                                            href="/logout"
                                             className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-rabi-600 bg-white hover:bg-gray-50"
                                         >
                                             {Translation.logout}
@@ -67,6 +70,11 @@ export default function Navbar({ user }: { user: User | null }) {
                                 </a>
                             </Link>
                         ))}
+                        {user && (
+                            <p className="font-medium hover:text-gray-900">
+                                {Translation.hello}, {user.firstName}
+                            </p>
+                        )}
                     </div>
                     {/* Panel logo on top right */}
                     <Link href="/">

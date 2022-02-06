@@ -12,13 +12,18 @@ export interface User {
 
 export interface Button {
     name: string;
-    href: string;
+    href?: string;
 }
 
-export interface Task {
+export interface TaskAsTeacher {
     id: number;
-    name: string;
-    studentNotes: string;
-    teacherNotes: string;
-    date: string;
+    timestamp: number;
+    owner: number;
+    acquired?: null | string;
+    teacherNotes?: null | string;
+    studentNotes?: null | string;
 }
+
+type hour = number | string; //Ex: 8 or '8'
+type minute = number | string; //Ex: 30 or '30'
+export type dclock = `${hour}:${minute}`; //Ex: '8:30'

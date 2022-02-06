@@ -1,7 +1,7 @@
 import Translation from '../translation.json';
 import { User } from '../lib/types';
 export default function Team({ teachers }: { teachers: User[] }) {
-    teachers.sort((a, b) => (a.grade > b.grade ? 1 : -1));
+    teachers.sort((a, b) => a.grade - b.grade);
     return (
         <div className="bg-gray-50">
             <div className="mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24">

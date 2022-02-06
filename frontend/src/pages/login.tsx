@@ -3,11 +3,6 @@ import { FormEvent, useRef } from 'react';
 export default function Login() {
     const form = useRef(null);
 
-    function submitForm(event: FormEvent<HTMLFormElement>): void {
-        const data = new FormData(form.current);
-        console.log(data);
-    }
-
     return (
         <div className="flex vertical-center">
             <div className="flex-col flex ml-auto mr-auto items-center w-full lg:w-2/3 md:w-3/5">

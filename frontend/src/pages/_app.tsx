@@ -1,5 +1,5 @@
 import '../styles/globals.scss';
-import { useUser } from '../lib/userHook';
+import { useUser } from '../lib/httpHooks';
 import { User } from '../lib/types';
 import PageWrapper from '../components/PageWrapper';
 function MyApp({ Component, pageProps }) {
