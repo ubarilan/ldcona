@@ -1,5 +1,3 @@
-const { redirect } = require('next/dist/server/api-utils');
-
 const apiURL =
     process.env.NODE_ENV === 'production'
         ? 'http://localhost:8080/api'

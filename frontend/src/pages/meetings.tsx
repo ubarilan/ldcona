@@ -139,9 +139,9 @@ export default function TeacherHome({ user }: { user: User }) {
                         }
                         refreshTimes={refreshTimes}
                     />
-                    <Tasks times={times} refreshTimes={refreshTimes} />
                 </div>
             </div>
+            <Tasks times={times} refreshTimes={refreshTimes} />
         </>
     );
 }

@@ -2,6 +2,8 @@ import '../styles/globals.scss';
 import { useUser } from '../lib/httpHooks';
 import { User } from '../lib/types';
 import PageWrapper from '../components/PageWrapper';
+import { SessionProvider } from 'next-auth/react';
+
 function MyApp({ Component, pageProps }) {
     const exampleUser: User = {
         id: 1,
@@ -15,9 +17,11 @@ function MyApp({ Component, pageProps }) {
     // setUser(exampleUser);
 
     return (
-        <PageWrapper user={user}>
-            <Component {...pageProps} />
-        </PageWrapper>
+        <SessionProvider session={pageProps.session} refetchInterval={0}>
+            <PageWrapper user={user}>
+                <Component {...pageProps} />
+            </PageWrapper>
+        </SessionProvider>
     );
 }
 
