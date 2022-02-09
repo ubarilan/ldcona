@@ -1,7 +1,7 @@
 const apiURL =
     process.env.NODE_ENV === 'production'
-        ? 'http://localhost:8080/api'
-        : 'http://localhost:3000/api';
+        ? 'http://127.0.0.1:8080/api'
+        : 'http://127.0.0.1:3000/apie';
 
 module.exports = {
     reactStrictMode: true,
@@ -11,7 +11,7 @@ module.exports = {
     async rewrites() {
         return [
             {
-                source: '/api/:path*',
+                source: '/apie/:path*',
                 destination: 'http://localhost:8080/api/:path*',
             },
         ];

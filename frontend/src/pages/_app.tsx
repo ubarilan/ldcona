@@ -5,17 +5,7 @@ import PageWrapper from '../components/PageWrapper';
 import { SessionProvider } from 'next-auth/react';
 
 function MyApp({ Component, pageProps }) {
-    const exampleUser: User = {
-        id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@gmail.com',
-        grade: null,
-        title: 'Your mom',
-    };
-    const [user, setUser] = useUser(exampleUser);
-    // setUser(exampleUser);
-
+    const [user, setUser] = useUser();
     return (
         <SessionProvider session={pageProps.session} refetchInterval={0}>
             <PageWrapper user={user}>
