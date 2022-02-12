@@ -22,23 +22,25 @@ export default function Tasks({
         month: month,
     };
 
+    function filterTimes(time) {
+        return (
+            time.acquired &&
+            getDateString(new Date(time.timestamp)) ===
+                getDateString(null, props)
+        );
+    }
+
     return (
         <div>
             <div className="mx-auto container py-20 px-6">
                 <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {times
-                        .filter(
-                            (time) =>
-                                time.acquired &&
-                                getDateString(new Date(time.timestamp)) ===
-                                    getDateString(null, props)
-                        )
-                        .map((time, i) => {
+                    {times.filter(filterTimes).map((time, i) => {
+                        return (
                             <div className="rounded" key={time.id}>
-                                <h1>{time}</h1>
                                 <Task time={time} refreshTimes={refreshTimes} />
-                            </div>;
-                        })}
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
