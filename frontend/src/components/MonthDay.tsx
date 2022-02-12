@@ -23,7 +23,7 @@ export default function MonthDay({ change, number, isSelected, hasTasks }) {
                         hasTasks && 'day-with-tasks'
                     }`}
                 >
-                    <p className="text-base text-gray-500 dark:text-gray-100 font-medium">
+                    <p className="text-base text-gray-900 font-medium">
                         {number}
                     </p>
                 </div>

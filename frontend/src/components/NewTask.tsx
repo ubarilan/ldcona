@@ -86,7 +86,7 @@ export default function NewTask({
     }
 
     return (
-        <div className="md:px-9 px-5 pt-5 pb-5 dark:bg-gray-700 bg-gray-50 rounded-b text:left">
+        <div className="md:px-9 px-5 pt-5 pb-5  bg-gray-600 rounded-b text:left">
             {showSuccess && (
                 <SuccesAlert
                     text="Meeting added successfully"

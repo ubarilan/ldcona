@@ -33,7 +33,7 @@ export default function TeacherHome({ user }: { user: User }) {
         <>
             <div className="flex items-center justify-center py-8 px-4">
                 <div className="max-w-sm w-full shadow-lg">
-                    <div className="md:p-8 p-5 dark:bg-gray-800 bg-white rounded-t">
+                    <div className="md:p-8 p-5 dark:bg-gray-400 bg-white rounded-t">
                         <div
                             className={`px-4 flex items-center justify-between ${
                                 monthsNumbers.includes(
@@ -43,7 +43,7 @@ export default function TeacherHome({ user }: { user: User }) {
                         >
                             <span
                                 tabIndex={0}
-                                className="focus:outline-none  text-base font-bold dark:text-gray-100 text-gray-800"
+                                className="focus:outline-none text-base font-bold text-gray-800"
                             >
                                 {counter >= 0
                                     ? months[Math.abs(counter) % 12]
@@ -56,7 +56,7 @@ export default function TeacherHome({ user }: { user: User }) {
                             <div className="flex items-center">
                                 <button
                                     aria-label="calendar backward"
-                                    className="focus:text-gray-400 hover:text-gray-400 text-gray-800 dark:text-gray-100"
+                                    className="focus:text-gray-400 hover:text-gray text-gray-800 "
                                     onClick={decCounter}
                                 >
                                     <svg
@@ -81,7 +81,7 @@ export default function TeacherHome({ user }: { user: User }) {
                                 </button>
                                 <button
                                     aria-label="calendar forward"
-                                    className="focus:text-gray-400 hover:text-gray-400 ml-3 text-gray-800 dark:text-gray-100"
+                                    className="focus:text-gray-400 hover:text-gray ml-3 text-gray-800"
                                     onClick={addCounter}
                                 >
                                     <svg
@@ -141,7 +141,17 @@ export default function TeacherHome({ user }: { user: User }) {
                     />
                 </div>
             </div>
-            <Tasks times={times} refreshTimes={refreshTimes} />
+            <Tasks
+                times={times}
+                refreshTimes={refreshTimes}
+                selectedDate={selectedDate}
+                year={currentDate.getFullYear() + Math.floor(counter / 12)}
+                month={
+                    counter >= 0
+                        ? Math.abs(counter) % 12
+                        : 12 - (Math.abs(counter) % 12)
+                }
+            />
         </>
     );
 }
