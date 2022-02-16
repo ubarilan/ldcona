@@ -7,6 +7,8 @@ export function initStudentRouter(this: Ldcona): void {
     this.studentRouter = Router();
     const router: Router = this.studentRouter;
 
+    router.post('/auth/google', this.googleAuthHandler());
+
     router.get('/teachers', async (req: Request, res: Response) => {
         const sql: string = 'SELECT id, firstName, lastName, email FROM users;';
         const teachers: CensoredUser[] = (

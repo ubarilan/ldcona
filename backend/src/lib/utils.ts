@@ -1,4 +1,5 @@
 import Ldcona from '../ldcona';
+import { EMAIL_HOSTNAME } from '../static/consts';
 import { CensoredTime, CensoredUser, Time, User } from './types';
 
 export async function checkIfTeacherExists(
@@ -23,4 +24,9 @@ export function censorUser(user: User): CensoredUser {
     const censoredUser: User = Object.assign({}, user);
     delete censoredUser.password;
     return censoredUser as CensoredUser;
+}
+
+export function isEmailAllowed(email: string): boolean {
+    EMAIL_HOSTNAME && email.endsWith(`@${EMAIL_HOSTNAME}`);
+    return true;
 }
