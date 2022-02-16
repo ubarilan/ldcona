@@ -1,18 +1,16 @@
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { GetServerSideProps } from 'next';
+import getConfig from 'next/config';
+import StudentLogin from '../components/StudentLogin';
 
-export default function StudentLogin() {
-    const { data: session, status } = useSession();
-    console.log(session?.user);
-
-    return (
-        <a
-            href="/api/auth/signin"
-            onClick={(e) => {
-                e.preventDefault();
-                signIn();
-            }}
-        >
-            login
-        </a>
-    );
+export default function StudentLoginPage({ googleClientID }) {
+    return <StudentLogin googleClientID={googleClientID} />;
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+    const { googleClientID } = getConfig().publicRuntimeConfig;
+    return {
+        props: {
+            googleClientID,
+        },
+    };
+};

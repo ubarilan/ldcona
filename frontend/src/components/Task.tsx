@@ -13,7 +13,7 @@ export default function Task({
 }) {
     const timeString = new Date(time.timestamp).toLocaleString().slice(0, -6);
     async function removeTime(time: TaskAsTeacher) {
-        const res = await callApi(`/times/remove/`, {
+        await callApi(`/times/remove/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(time),

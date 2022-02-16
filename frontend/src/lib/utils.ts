@@ -1,3 +1,5 @@
+import callApi from './callApi';
+
 export function getDateString(
     date: Date,
     props?: { month: number; year: number; selectedDate: number }
@@ -28,4 +30,21 @@ export function getTimeStamp(
     date.setHours(hours);
     date.setMinutes(minutes);
     return date.getTime();
+}
+
+export async function handleGoogleLogin(googleData) {
+    console.log('googleData', googleData);
+    const res = await callApi('/student/auth/google', {
+        method: 'POST',
+        body: JSON.stringify({
+            token: googleData.tokenId,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    console.log('res', res);
+
+    // store returned user somehow
 }

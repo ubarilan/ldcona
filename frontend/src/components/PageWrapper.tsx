@@ -1,4 +1,3 @@
-import Navbar from './Navbar';
 import Translation from '../translation.json';
 import Head from 'next/head';
 import Footer from './Footer';
