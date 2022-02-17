@@ -7,7 +7,13 @@ export function initStudentRouter(this: Ldcona): void {
     this.studentRouter = Router();
     const router: Router = this.studentRouter;
 
-    router.post('/auth/google', this.googleAuthHandler());
+    router.get('/userinfo', (req: Request, res: Response) => {
+        if (req.studentUser) {
+            res.send({ user: req.studentUser });
+        } else {
+            res.send({ user: null });
+        }
+    });
 
     router.get('/teachers', async (req: Request, res: Response) => {
         const sql: string = 'SELECT id, firstName, lastName, email FROM users;';

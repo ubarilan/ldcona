@@ -25,6 +25,13 @@ export interface User {
     grade: grade | null;
     title: string;
 }
+
+export interface StudentUser {
+    email: string;
+    name: string;
+    picture: string;
+}
+
 // Global type for req.user
 declare global {
     namespace Express {
@@ -36,6 +43,10 @@ declare global {
             password: string;
             grade: grade | null;
             title: string;
+        }
+
+        interface Request {
+            studentUser: StudentUser;
         }
     }
 }

@@ -16,6 +16,19 @@ export function initMainRouter(this: Ldcona): void {
         })
     );
 
+    router.get(
+        '/auth/google',
+        this.passport.authenticate('google', { scope: ['email', 'profile'] })
+    );
+
+    router.get(
+        '/auth/google/callback',
+        this.passport.authenticate('google', {
+            successRedirect: '/login-success',
+            failureRedirect: '/login-fail',
+        })
+    );
+
     // Logout endpoint
     router.post('/logout', (req: Request, res: Response) => {
         req.logout();
