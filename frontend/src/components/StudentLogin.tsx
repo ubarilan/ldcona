@@ -1,18 +1,16 @@
-import getConfig from 'next/config';
 import GoogleLogin from 'react-google-login';
-import { handleGoogleLogin } from '../lib/utils';
-
+import GoogleLoginButton from './GoogleLoginButton';
 export default function StudentLogin({ googleClientID }) {
-    const redirectUri = 'http://localhost:3000/api/student/auth/google';
+    const redirectUri = 'http://localhost:3000/api/auth/google/';
 
     return (
-        <GoogleLogin
-            clientId={googleClientID}
-            buttonText="Log in with Google"
-            onSuccess={(googleData) => handleGoogleLogin(googleData)}
-            onFailure={(googleData) => handleGoogleLogin(googleData)}
-            cookiePolicy={'single_host_origin'}
-            redirectUri={redirectUri}
-        />
+        <>
+            <GoogleLogin
+                clientId={googleClientID}
+                buttonText="Log in with Google"
+                redirectUri={redirectUri}
+            />
+            <GoogleLoginButton href={redirectUri} />
+        </>
     );
 }

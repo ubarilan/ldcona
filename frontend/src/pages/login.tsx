@@ -9,7 +9,7 @@ export default function Login() {
                 <h1 className="font-bold text-2xl my-10"> Login </h1>
                 <form
                     ref={form}
-                    action="/apie/login"
+                    action="/api/login"
                     method="POST"
                     name="login"
                     className="mt-2 flex flex-col lg:w-1/2 w-8/12 "

@@ -34,7 +34,7 @@ export function getTimeStamp(
 
 export async function handleGoogleLogin(googleData) {
     console.log('googleData', googleData);
-    const res = await callApi('/student/auth/google', {
+    const res = await callApi('/auth/google', {
         method: 'POST',
         body: JSON.stringify({
             token: googleData.tokenId,
