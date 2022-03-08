@@ -2,32 +2,69 @@ import Ldcona from '../../ldcona';
 import { Router, Request, Response } from 'express';
 import { Time, CensoredUser, User } from '../types';
 import { censorUser } from '../utils';
+import { InternalOAuthError } from 'passport-oauth2';
 
 export function initMainRouter(this: Ldcona): void {
     this.mainRouter = Router();
     const router: Router = this.mainRouter;
 
     // Login endpoint
-    router.post(
-        '/login',
-        this.passport.authenticate('local', {
-            successRedirect: '/login-success',
-            failureRedirect: '/login-fail',
-        })
-    );
+    router.post('/login', (req, res, next) => {
+        this.passport.authenticate(
+            'local',
+            (error: Error, user: User, authError: { message: string }) => {
+                if (error) {
+                    res.status(500).json({
+                        error: error.message,
+                    });
+                } else if (authError) {
+                    res.redirect(`/login?err=${authError.message}`);
+                } else if (user) {
+                    req.login(user, (err) => {
+                        if (err) {
+                            res.status(500).json({
+                                error: err.message,
+                            });
+                        } else {
+                            res.redirect('/login-success');
+                        }
+                    });
+                } else {
+                    res.redirect('/login-fail');
+                }
+            }
+        )(req, res, next);
+    });
 
     router.get(
         '/auth/google',
         this.passport.authenticate('google', { scope: ['email', 'profile'] })
     );
 
-    router.get(
-        '/auth/google/callback',
-        this.passport.authenticate('google', {
-            successRedirect: '/login-success',
-            failureRedirect: '/login-fail',
-        })
-    );
+    router.get('/auth/google/callback', (req, res) => {
+        this.passport.authenticate(
+            'google',
+            (
+                internalError: InternalOAuthError | null,
+                user: User | false,
+                err: { message: string }
+            ) => {
+                if (internalError) {
+                    res.status(500).send(internalError);
+                } else if (user) {
+                    req.login(user, (err) => {
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            res.redirect('/login-success');
+                        }
+                    });
+                } else {
+                    res.redirect(`/login-fail?err=${err.message}`);
+                }
+            }
+        )(req, res);
+    });
 
     // Logout endpoint
     router.post('/logout', (req: Request, res: Response) => {

@@ -35,6 +35,8 @@
         "@types/express-session": "^1.17.4",
         "@types/mysql": "^2.15.19",
         "@types/passport": "^1.0.7",
-        "@types/passport-local": "^1.0.34"
+        "@types/passport-google-oauth2": "^0.1.4",
+        "@types/passport-local": "^1.0.34",
+        "@types/passport-oauth2": "^1.4.11"
     }
 }
