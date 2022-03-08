@@ -31,20 +31,3 @@ export function getTimeStamp(
     date.setMinutes(minutes);
     return date.getTime();
 }
-
-export async function handleGoogleLogin(googleData) {
-    console.log('googleData', googleData);
-    const res = await callApi('/auth/google', {
-        method: 'POST',
-        body: JSON.stringify({
-            token: googleData.tokenId,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    });
-
-    console.log('res', res);
-
-    // store returned user somehow
-}
