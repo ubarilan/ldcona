@@ -7,8 +7,7 @@ module.exports = {
     reactStrictMode: true,
     publicRuntimeConfig: {
         apiURL,
-        googleClientID:
-            '814901300076-d98e7r4v6ohjqn4gj3k8n1ldop2li5dj.apps.googleusercontent.com',
+        redirectUri: 'http://localhost:3000/api/auth/google/',
     },
     async rewrites() {
         return [

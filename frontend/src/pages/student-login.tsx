@@ -2,15 +2,19 @@ import { GetServerSideProps } from 'next';
 import getConfig from 'next/config';
 import StudentLogin from '../components/StudentLogin';
 
-export default function StudentLoginPage({ googleClientID }) {
-    return <StudentLogin googleClientID={googleClientID} />;
+export default function StudentLoginPage({
+    redirectUri,
+}: {
+    redirectUri: string;
+}) {
+    return <StudentLogin redirectUri={redirectUri} />;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    const { googleClientID } = getConfig().publicRuntimeConfig;
+export function getServerSideProps() {
+    const { redirectUri } = getConfig().publicRuntimeConfig;
     return {
         props: {
-            googleClientID,
+            redirectUri,
         },
     };
-};
+}

@@ -2,7 +2,6 @@ export default function MonthDay({ change, number, isSelected, hasTasks }) {
     function handleClick(): void {
         change(number);
     }
-    console.log(hasTasks);
     return (
         <td onClick={() => handleClick()} className="pt-6">
             {isSelected ? (
