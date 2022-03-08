@@ -53,7 +53,7 @@ export default function MobileNav({ buttons }: { buttons: Button[] }) {
                         ))}
                     </div>
                     <a
-                        href="/login"
+                        href="/student-login"
                         className="block w-full px-5 py-3 text-center font-medium text-rabi-600 bg-gray-50 hover:bg-gray-100"
                     >
                         {Translation.login}

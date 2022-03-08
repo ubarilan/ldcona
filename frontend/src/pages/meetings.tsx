@@ -7,8 +7,21 @@ import NewTask from '../components/NewTask';
 import { User } from '../lib/types';
 import { useTimes } from '../lib/httpHooks';
 import Translation from '../translation.json';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function TeacherHome({ user }: { user: User }) {
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!user) {
+            router.push('/login');
+        }
+    }, []);
+    if (!user) {
+        return null;
+    }
+
     const { months } = Translation;
     const currentDate = new Date();
 
