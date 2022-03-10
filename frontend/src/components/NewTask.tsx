@@ -7,7 +7,6 @@ import SuccesAlert from './alerts/SuccessAlert';
 import TimePicker from './TimePicker';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import axios from 'axios';
 
 export default function NewTask({
     selectedDate,
@@ -23,19 +22,17 @@ export default function NewTask({
     const [showSuccess, setShowSuccess] = useState(false);
     const [submitError, setSubmitError] = useState(null);
 
-    const [students, setStudents] = useState(['Loading...']);
+    const [students, setStudents] = useState(null);
+
+    async function getStudents() {
+        const response = await callApi('/student/students');
+        setStudents(response);
+    }
 
     useEffect(() => {
-        const loadStudents = async () => {
-            const response = await axios.get(
-                'http://localhost:3000/api/student/students'
-            );
-            setStudents(response.data);
-            console.log(students);
-        };
-        loadStudents();
+        getStudents();
     }, []);
-
+    console.log(students);
     function successForm() {
         setShowSuccess(true);
         setSubmitError(null);
@@ -101,6 +98,7 @@ export default function NewTask({
         setShowSelection(true);
     }
 
+    console.log(`aaaaa ${students}`);
     return (
         <div className="md:px-9 px-5 pt-5 pb-5  bg-gray-600 rounded-b text:left">
             {showSuccess && (
@@ -122,7 +120,9 @@ export default function NewTask({
                     <Autocomplete
                         id="student-select"
                         className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        options={students}
+                        options={students.map((student) => {
+                            return { ...student, label: student.name };
+                        })}
                         renderInput={(params) => (
                             <TextField
                                 {...params}
