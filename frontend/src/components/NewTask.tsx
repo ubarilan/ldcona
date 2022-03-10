@@ -1,10 +1,13 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import callApi from '../lib/callApi';
 import { dclock } from '../lib/types';
 import { getDateString, getTimeStamp } from '../lib/utils';
 import ErrorAlert from './alerts/ErrorAlert';
 import SuccesAlert from './alerts/SuccessAlert';
 import TimePicker from './TimePicker';
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+import axios from 'axios';
 
 export default function NewTask({
     selectedDate,
@@ -19,6 +22,19 @@ export default function NewTask({
 }) {
     const [showSuccess, setShowSuccess] = useState(false);
     const [submitError, setSubmitError] = useState(null);
+
+    const [students, setStudents] = useState(['Loading...']);
+
+    useEffect(() => {
+        const loadStudents = async () => {
+            const response = await axios.get(
+                'http://localhost:3000/api/student/students'
+            );
+            setStudents(response.data);
+            console.log(students);
+        };
+        loadStudents();
+    }, []);
 
     function successForm() {
         setShowSuccess(true);
@@ -103,12 +119,18 @@ export default function NewTask({
                     onSubmit={submit}
                     className="pt-5"
                 >
-                    <input
+                    <Autocomplete
+                        id="student-select"
                         className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                        type="text"
-                        name="student"
-                        placeholder="Student"
-                        aria-label="Student"
+                        options={students}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Student"
+                                name="student"
+                                type="text"
+                            />
+                        )}
                     />
                     <input
                         className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
