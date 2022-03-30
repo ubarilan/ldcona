@@ -7,7 +7,7 @@ module.exports = {
     reactStrictMode: true,
     publicRuntimeConfig: {
         apiURL,
-        redirectUri: 'http://localhost:3000/api/auth/google/',
+        googleRedirectUri: 'http://localhost:3000/api/auth/google/',
     },
     async rewrites() {
         return [

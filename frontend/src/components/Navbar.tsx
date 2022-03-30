@@ -12,8 +12,6 @@ export default function Navbar({ user }: { user: User | null }) {
         { name: Translation.meetings, href: '/meetings' },
     ];
 
-    // user && buttons.push({ name: Translation.hello, href: '/profile' });
-
     return (
         <Popover>
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -30,18 +28,9 @@ export default function Navbar({ user }: { user: User | null }) {
                                 <>
                                     <div className="hidden  md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
                                         <span className="inline-flex rounded-md shadow">
-                                            <Link href="/student-login">
-                                                <a className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-rabi-600 bg-white hover:bg-gray-50">
-                                                    {Translation.login_student}
-                                                </a>
-                                            </Link>
-                                        </span>
-                                    </div>
-                                    <div className="hidden  md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
-                                        <span className="inline-flex rounded-md shadow">
                                             <Link href="/login">
                                                 <a className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md bg-rabi-600 text-white hover:bg-rabi-700">
-                                                    {Translation.login_teacher}
+                                                    {Translation.login}
                                                 </a>
                                             </Link>
                                         </span>
