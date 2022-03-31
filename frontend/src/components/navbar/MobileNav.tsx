@@ -52,12 +52,11 @@ export default function MobileNav({ buttons }: { buttons: Button[] }) {
                             </Link>
                         ))}
                     </div>
-                    <a
-                        href="/student-login"
-                        className="block w-full px-5 py-3 text-center font-medium text-rabi-600 bg-gray-50 hover:bg-gray-100"
-                    >
-                        {Translation.login}
-                    </a>
+                    <Link href="/login">
+                        <a className="block w-full px-5 py-3 text-center font-medium text-rabi-600 bg-gray-50 hover:bg-gray-100">
+                            {Translation.login}
+                        </a>
+                    </Link>
                 </div>
             </Popover.Panel>
         </Transition>

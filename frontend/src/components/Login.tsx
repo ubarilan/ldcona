@@ -45,18 +45,18 @@ export default function LoginForm({
                             <div className="relative">
                                 <div
                                     className="
-                    inline-flex
-                    items-center
-                    justify-center
-                    absolute
-                    left-2
-                    top-0
-                    h-full
-                    w-6
-                    text-blue-500
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    absolute
+                                    left-2
+                                    top-0
+                                    h-full
+                                    w-5
+                                    text-blue-500
                   "
                                 >
-                                    <FontAwesomeIcon icon={faAt} size="10x" />
+                                    <FontAwesomeIcon icon={faAt} />
                                 </div>
 
                                 <input

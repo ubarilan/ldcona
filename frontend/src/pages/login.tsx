@@ -15,7 +15,11 @@ export default function Login({
         <div className="flex vertical-center">
             <div className="flex-col flex ml-auto mr-auto items-center w-full lg:w-2/3 md:w-3/5">
                 <h1 className="font-bold text-2xl my-10"> Login </h1>
-                {err && <ErrorAlert text={String(err)} show={true} />}
+                {err && (
+                    <div className="mb-1">
+                        <ErrorAlert text={String(err)} show={true} />
+                    </div>
+                )}
                 {<LoginForm googleRedirectUri={googleRedirectUri} />}
             </div>
         </div>
