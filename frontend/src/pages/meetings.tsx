@@ -14,6 +14,9 @@ import axios from 'axios';
 import getConfig from 'next/config';
 
 export default function TeacherHome({ user }: { user: User }) {
+    if (user == null) {
+        return <h1>404 Not found</h1>;
+    }
     const router = useRouter();
 
     const { months } = Translation;

@@ -70,7 +70,7 @@ export default function LoginForm({
                     pr-4
                     rounded-2xl
                     border border-gray-400
-                    w-full
+                    w-80
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
@@ -113,7 +113,7 @@ export default function LoginForm({
                     pr-4
                     rounded-2xl
                     border border-gray-400
-                    w-full
+                    w-80
                     py-2
                     focus:outline-none focus:border-blue-400
                   "

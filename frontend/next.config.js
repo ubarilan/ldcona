@@ -1,13 +1,13 @@
 const apiURL =
     process.env.NODE_ENV === 'production'
         ? 'http://localhost:8080/api'
-        : 'http://localhost:3000/api';
+        : 'https://ldcona.hostar.one/api';
 
 module.exports = {
     reactStrictMode: true,
     publicRuntimeConfig: {
         apiURL,
-        googleRedirectUri: 'http://localhost:3000/api/auth/google/',
+        googleRedirectUri: 'https://ldcona.hostar.one/api/auth/google/',
     },
     async rewrites() {
         return [
