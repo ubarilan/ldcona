@@ -46,7 +46,7 @@ export default function initialize(passport, getUserByEmail, getUserById): any {
                 clientID: process.env.GOOGLE_CLIENT_ID,
                 clientSecret: process.env.GOOGLE_CLIENT_SECRET,
                 callbackURL:
-                    'https://ldcona.hostar.one/api/auth/google/callback',
+                    'https://ldcona.hostar.one/apie/auth/google/callback',
                 passReqToCallback: true,
             },
             authenticateGoogleUser
