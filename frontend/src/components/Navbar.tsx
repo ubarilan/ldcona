@@ -7,9 +7,9 @@ import MobileNav from './navbar/MobileNav';
 
 export default function Navbar({ user }: { user: User | null }) {
     const buttons: Button[] = [
-        { name: Translation.team, href: '/team' },
-        { name: Translation.calendar, href: '/calendar' },
-        { name: Translation.meetings, href: '/meetings' },
+        //{ name: Translation.team, href: '/team' },
+        //{ name: Translation.calendar, href: '/calendar' },
+        //{ name: Translation.meetings, href: '/meetings' },
     ];
 
     return (

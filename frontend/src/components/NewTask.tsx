@@ -32,7 +32,6 @@ export default function NewTask({
     useEffect(() => {
         getStudents();
     }, []);
-    console.log(students);
     function successForm() {
         setShowSuccess(true);
         setSubmitError(null);
@@ -98,7 +97,6 @@ export default function NewTask({
         setShowSelection(true);
     }
 
-    console.log(`aaaaa ${students}`);
     return (
         <div className="md:px-9 px-5 pt-5 pb-5  bg-gray-600 rounded-b text:left">
             {showSuccess && (

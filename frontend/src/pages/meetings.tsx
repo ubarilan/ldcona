@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from 'react';
 import Week from '../components/Week';
 import Month from '../components/Month';
@@ -8,14 +9,10 @@ import { User } from '../lib/types';
 import { useTimes } from '../lib/httpHooks';
 import Translation from '../translation.json';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { GetServerSideProps } from 'next';
-import axios from 'axios';
-import getConfig from 'next/config';
 
 export default function TeacherHome({ user }: { user: User }) {
     if (user == null) {
-        return <h1>404 Not found</h1>;
+        return <h1>403 Forbidden</h1>;
     }
     const router = useRouter();
 

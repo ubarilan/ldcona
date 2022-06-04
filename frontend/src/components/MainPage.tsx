@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import Translation from '../translation.json';
-import Navbar from './Navbar';
-import PageWrapper from './PageWrapper';
 
-export default function Hero() {
+export default function MainPage() {
     return (
         <main className="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
             <div className="text-center">
@@ -20,7 +18,7 @@ export default function Hero() {
                 </p>
                 <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
                     <div className="rounded-md shadow">
-                        <Link href="#">
+                        <Link href="/meetings">
                             <a className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-rabi-600 hover:bg-rabi-700 md:py-4 md:text-lg md:px-10">
                                 {Translation.set_appointment}
                             </a>

@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 const DynamicNav = dynamic(() => import('./Navbar'), { ssr: false });
 export default function PageWrapper({ children, user }) {
     return (
-        <div className="">
+        <div>
             <Head>
                 <link rel="icon" href="/img/favicon.ico" />
                 <title>

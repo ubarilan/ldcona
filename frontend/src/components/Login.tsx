@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAt, faLock } from '@fortawesome/free-solid-svg-icons';
+
 export default function LoginForm({
     googleRedirectUri,
 }: {
@@ -163,27 +164,21 @@ export default function LoginForm({
                 </div>
             </div>
             <div className="flex justify-center items-center mt-6">
-                <a
-                    href="#"
-                    target="_blank"
-                    className="
-            inline-flex
+                <span
+                    className="ml-2 inline-flex
             items-center
             text-gray-700
             font-medium
-            text-xs text-center
-          "
+            text-xs text-center"
                 >
-                    <span className="ml-2">
-                        Login with
-                        <a
-                            href={googleRedirectUri}
-                            className="text-xs ml-1 text-blue-500 font-semibold"
-                        >
-                            Google
-                        </a>
-                    </span>
-                </a>
+                    Login with
+                    <a
+                        href={googleRedirectUri}
+                        className="text-xs ml-1 text-blue-500 font-semibold"
+                    >
+                        Google
+                    </a>
+                </span>
             </div>
         </div>
     );

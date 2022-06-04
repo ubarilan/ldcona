@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
     const [user] = useUser();
     return (
         <PageWrapper user={user}>
-            <Component {...pageProps} />
+            <Component {...pageProps} user={user} />
         </PageWrapper>
     );
 }
