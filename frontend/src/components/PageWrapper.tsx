@@ -2,6 +2,7 @@ import Translation from '../translation.json';
 import Head from 'next/head';
 import Footer from './Footer';
 import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/react';
 
 const DynamicNav = dynamic(() => import('./Navbar'), { ssr: false });
 export default function PageWrapper({ children, user }) {

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Translation from '../translation.json';
+import { User } from '../lib/types';
 
 export default function MainPage() {
     return (

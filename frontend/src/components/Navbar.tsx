@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button, User } from '../lib/types';
 import Translation from '../translation.json';
 import MobileNav from './navbar/MobileNav';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function Navbar({ user }: { user: User | null }) {
     const buttons: Button[] = [
@@ -11,6 +12,7 @@ export default function Navbar({ user }: { user: User | null }) {
         //{ name: Translation.calendar, href: '/calendar' },
         //{ name: Translation.meetings, href: '/meetings' },
     ];
+    const { status } = useSession();
 
     return (
         <Popover>
@@ -24,18 +26,34 @@ export default function Navbar({ user }: { user: User | null }) {
                             className="flex items-center justify-between w-full md:w-auto"
                             dir="rtl"
                         >
-                            {!user ? (
-                                <>
-                                    <div className="hidden  md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
-                                        <span className="inline-flex rounded-md shadow">
-                                            <Link href="/login">
-                                                <a className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md bg-rabi-600 text-white hover:bg-rabi-700">
-                                                    {Translation.login}
+                            {!user && status === 'unauthenticated' ? (
+                                <div className="md:flex space-x-10 gap-x-1">
+                                    <div className="hidden md:flex md:items-center md:justify-end md:inset-y-0 md:left-0 transition duration-300 ease-in-out transform hover:scale-120 hover:-translate-y-1">
+                                        <span className="inline-flex rounded-md shadow border-rabi-600 border ">
+                                            <Link href="/api/auth/signin">
+                                                <a
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        signIn();
+                                                    }}
+                                                    href="/api/auth/signin"
+                                                    className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md bg-white text-rabi-600 hover:bg-gray-200"
+                                                >
+                                                    {Translation.student_login}
                                                 </a>
                                             </Link>
                                         </span>
                                     </div>
-                                </>
+                                    <div className="hidden  md:flex md:items-center md:justify-end md:inset-y-0 md:left-0 transition duration-300 ease-in-out transform hover:scale-120 hover:-translate-y-1">
+                                        <span className="inline-flex rounded-md shadow">
+                                            <Link href="/login">
+                                                <a className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md bg-rabi-600 text-white hover:bg-rabi-700">
+                                                    {Translation.teacher_login}
+                                                </a>
+                                            </Link>
+                                        </span>
+                                    </div>
+                                </div>
                             ) : (
                                 <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:left-0">
                                     <span className="inline-flex rounded-md shadow">

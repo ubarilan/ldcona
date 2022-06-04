@@ -31,7 +31,7 @@ export default function LoginForm({
                 </div>
                 <div className="mt-10">
                     <form
-                        action="/api/login"
+                        action="/apie/login"
                         method="POST"
                         name="login"
                         className="mt-2 flex flex-col lg:w-1/2 width"
